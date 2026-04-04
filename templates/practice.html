@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+{% block title %}Practice — {{ question.subject }}{% endblock %}
+
+{% block content %}
+<div class="practice-container">
+  <div class="progress-bar-wrap">
+    <div class="progress-bar" style="width: {{ ((question_number - 1) / total * 100)|int }}%;"></div>
+  </div>
+  <p class="progress-label">Question {{ question_number }} of {{ total }}</p>
+
+  <div class="question-card">
+    <p class="topic-tag">{{ question.topic }}</p>
+    <p class="question-text">{{ question.question_text }}</p>
+
+    <form method="post" action="{{ url_for('answer') }}" id="answer-form">
+      {% for letter, text in [('A', question.choice_a), ('B', question.choice_b), ('C', question.choice_c), ('D', question.choice_d)] %}
+      <label class="choice-label">
+        <input type="radio" name="answer" value="{{ letter }}" required />
+        <span class="choice-key">{{ letter }}</span>
+        <span class="choice-text">{{ text }}</span>
+      </label>
+      {% endfor %}
+
+      <div class="question-actions">
+        <button type="submit" class="btn">Submit Answer</button>
+      </div>
+    </form>
+  </div>
+
+  <p class="source-note">
+    Source: {{ question.exam_session }} {{ question.exam_year }} Algebra I, Question {{ question.question_number }}
+  </p>
+</div>
+{% endblock %}

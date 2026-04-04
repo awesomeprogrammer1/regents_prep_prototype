@@ -1,0 +1,88 @@
+{% extends "layout.html" %}
+{% block title %}Dashboard — Regents Prep{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+  <h2>Your Dashboard</h2>
+  <p class="muted">Showing cumulative performance across all {{ session_count }} session{% if session_count != 1 %}s{% endif %}.</p>
+
+  {% if total_attempted == 0 %}
+  <div class="empty-state">
+    <p>You haven't completed any practice sessions yet.</p>
+    <a href="{{ url_for('index') }}" class="btn">Start Practicing</a>
+  </div>
+
+  {% else %}
+
+  <div class="stat-row">
+    <div class="stat-card">
+      <div class="stat-number">{{ total_attempted }}</div>
+      <div class="stat-label">Questions Answered</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">{{ total_correct }}</div>
+      <div class="stat-label">Correct</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">{{ overall_accuracy }}%</div>
+      <div class="stat-label">Overall Accuracy</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">{{ session_count }}</div>
+      <div class="stat-label">Sessions</div>
+    </div>
+  </div>
+
+  {% if weak_topics %}
+  <div class="recommendations">
+    <h3>Recommended Focus Areas</h3>
+    <p>These topics are below 60% accuracy. Spend extra time here:</p>
+    <ul>
+      {% for t in weak_topics %}
+      <li>
+        <strong>{{ t.topic }}</strong> &mdash;
+        {{ t.correct }}/{{ t.attempted }} correct ({{ t.accuracy }}%)
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% else %}
+  <p class="success-note">You're above 60% accuracy on all topics. Keep it up!</p>
+  {% endif %}
+
+  <div class="topic-table-wrap">
+    <h3>All Topics</h3>
+    <table class="topic-table">
+      <thead>
+        <tr>
+          <th>Topic</th>
+          <th>Attempted</th>
+          <th>Correct</th>
+          <th>Accuracy</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for t in topics %}
+        <tr class="{% if t.needs_work %}row-needs-work{% endif %}">
+          <td>{{ t.topic }}</td>
+          <td>{{ t.attempted }}</td>
+          <td>{{ t.correct }}</td>
+          <td>
+            <div class="accuracy-bar-wrap">
+              <div class="accuracy-bar" style="width: {{ t.accuracy }}%;
+                background: {% if t.needs_work %}#e74c3c{% else %}#27ae60{% endif %};"></div>
+              <span>{{ t.accuracy }}%</span>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="results-actions">
+    <a href="{{ url_for('index') }}" class="btn">Practice More</a>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

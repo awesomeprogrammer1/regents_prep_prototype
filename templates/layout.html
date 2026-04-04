@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}Regents Prep{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+  <header>
+    <nav class="nav-bar">
+      <a class="nav-brand" href="{{ url_for('index') }}">Regents Prep</a>
+      <div class="nav-links">
+        {% if session.get('user_id') and session.get('user_id') != 0 %}
+          <a href="{{ url_for('dashboard') }}">Dashboard</a>
+          <span class="nav-user">{{ session.get('username') }}</span>
+          <a href="{{ url_for('logout') }}">Log out</a>
+        {% else %}
+          <a href="{{ url_for('login') }}">Log in</a>
+          <a href="{{ url_for('register') }}" class="btn-sm">Register</a>
+        {% endif %}
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="flash-messages">
+          {% for msg in messages %}
+            <p class="flash">{{ msg }}</p>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer>
+    <p>Regents exam questions &copy; New York State Education Department. Used with permission for educational purposes.</p>
+  </footer>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

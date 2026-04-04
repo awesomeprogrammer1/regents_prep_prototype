@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+{% block title %}Feedback — Regents Prep{% endblock %}
+
+{% block content %}
+<div class="practice-container">
+  <p class="progress-label">Question {{ question_number }} of {{ total }}</p>
+
+  <div class="question-card">
+    <p class="topic-tag">{{ question.topic }}</p>
+    <p class="question-text">{{ question.question_text }}</p>
+
+    <div class="choices-review">
+      {% for letter, text in choices.items() %}
+      <div class="choice-review
+        {% if letter == question.correct_answer %} choice-correct
+        {% elif letter == selected and not is_correct %} choice-wrong
+        {% endif %}">
+        <span class="choice-key">{{ letter }}</span>
+        <span class="choice-text">{{ text }}</span>
+        {% if letter == question.correct_answer %}
+          <span class="badge badge-correct">Correct answer</span>
+        {% elif letter == selected and not is_correct %}
+          <span class="badge badge-wrong">Your answer</span>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="feedback-banner {% if is_correct %}feedback-correct{% else %}feedback-wrong{% endif %}">
+      {% if is_correct %}
+        Correct! Well done.
+      {% else %}
+        Incorrect. The correct answer is {{ question.correct_answer }}.
+      {% endif %}
+    </div>
+
+    {% if is_guest %}
+    <p class="guest-note">
+      <a href="{{ url_for('register') }}">Create a free account</a> to save your results and track topic performance.
+    </p>
+    {% endif %}
+
+    <div class="question-actions">
+      {% if is_last %}
+        <a href="{{ url_for('results') }}" class="btn">See Results</a>
+      {% else %}
+        <a href="{{ url_for('next_question') }}" class="btn">Next Question &rarr;</a>
+      {% endif %}
+    </div>
+  </div>
+
+  <p class="source-note">
+    Source: {{ question.exam_session }} {{ question.exam_year }} Algebra I, Question {{ question.question_number }}
+  </p>
+</div>
+{% endblock %}

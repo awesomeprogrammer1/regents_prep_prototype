@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block title %}Regents Prep — Home{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <h1>NYS Regents Exam Prep</h1>
+  <p class="hero-sub">Practice real past Regents questions, track your weak topics, and study smarter.</p>
+</section>
+
+<section class="subject-grid">
+  <h2>Choose a Subject</h2>
+  <div class="cards">
+    {% for subject in subjects %}
+    <div class="card">
+      <h3>{{ subject }}</h3>
+      <p>Multiple-choice practice from recent Regents exams. Tracks your performance by topic.</p>
+      <a href="{{ url_for('practice', subject=subject) }}" class="btn">Start Practice</a>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% if not session.get('user_id') or session.get('user_id') == 0 %}
+<section class="cta-section">
+  <p>
+    <a href="{{ url_for('register') }}" class="btn">Create a free account</a>
+    to save your progress and track performance across sessions.
+  </p>
+  <p class="muted">Or <a href="{{ url_for('practice', subject='Algebra I') }}">practice as a guest</a> without saving results.</p>
+</section>
+{% endif %}
+{% endblock %}

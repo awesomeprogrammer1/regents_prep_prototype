@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block title %}Log In — Regents Prep{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+  <h2>Log in</h2>
+  <form method="post" action="{{ url_for('login') }}">
+    <label for="username">Username</label>
+    <input id="username" name="username" type="text" required placeholder="Your username" />
+
+    <label for="password">Password</label>
+    <input id="password" name="password" type="password" required placeholder="Your password" />
+
+    <button type="submit" class="btn">Log in</button>
+  </form>
+  <p class="auth-alt">No account? <a href="{{ url_for('register') }}">Register</a></p>
+</div>
+{% endblock %}
