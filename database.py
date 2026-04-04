@@ -176,3 +176,5 @@ def get_user_by_id(user_id):
     row = conn.execute('SELECT * FROM users WHERE id = ?', (user_id,)).fetchone()
     conn.close()
     return dict(row) if row else None
+
+

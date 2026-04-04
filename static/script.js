@@ -1,5 +1,5 @@
-// Highlight selected radio choice visually
 document.addEventListener('DOMContentLoaded', function () {
+  // Highlight selected radio choice visually
   const choiceLabels = document.querySelectorAll('.choice-label');
   choiceLabels.forEach(function (label) {
     const radio = label.querySelector('input[type="radio"]');
@@ -9,4 +9,11 @@ document.addEventListener('DOMContentLoaded', function () {
       label.classList.add('choice-selected');
     });
   });
+
+  // Apply bar widths from data-width attributes
+  document.querySelectorAll('[data-width]').forEach(function (el) {
+    el.style.width = el.dataset.width + '%';
+  });
 });
+
+

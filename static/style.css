@@ -346,6 +346,8 @@ main { flex: 1; padding: 2rem 1.5rem; max-width: 860px; margin: 0 auto; width: 1
   max-width: 120px;
   flex-shrink: 0;
 }
+.bar-ok        { background: #27ae60; }
+.bar-needs-work { background: #e74c3c; }
 
 .results-actions { display: flex; gap: .75rem; margin-top: 1.5rem; flex-wrap: wrap; }
 
@@ -390,3 +392,5 @@ footer {
   .nav-bar { padding: 0 1rem; }
   main { padding: 1.25rem 1rem; }
 }
+
+

@@ -4,7 +4,7 @@
 {% block content %}
 <div class="practice-container">
   <div class="progress-bar-wrap">
-    <div class="progress-bar" style="width: {{ ((question_number - 1) / total * 100)|int }}%;"></div>
+    <div class="progress-bar" data-width="{{ ((question_number - 1) / total * 100)|int }}"></div>
   </div>
   <p class="progress-label">Question {{ question_number }} of {{ total }}</p>
 

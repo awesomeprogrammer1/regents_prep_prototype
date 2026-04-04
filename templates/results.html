@@ -56,8 +56,7 @@
           <td>{{ t.correct }}</td>
           <td>
             <div class="accuracy-bar-wrap">
-              <div class="accuracy-bar" style="width: {{ t.accuracy }}%;
-                background: {% if t.needs_work %}#e74c3c{% else %}#27ae60{% endif %};"></div>
+              <div class="accuracy-bar {% if t.needs_work %}bar-needs-work{% else %}bar-ok{% endif %}" data-width="{{ t.accuracy }}"></div>
               <span>{{ t.accuracy }}%</span>
             </div>
           </td>
@@ -74,3 +73,4 @@
   {% endif %}
 </div>
 {% endblock %}
+
