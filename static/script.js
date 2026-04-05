@@ -30,10 +30,13 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   // ------------------------------------------------------------------
-  // Apply bar widths from data-width attributes
+  // Apply bar widths from data-width attributes (progress bars, accuracy, sidebar stats)
   // ------------------------------------------------------------------
   document.querySelectorAll('[data-width]').forEach(function (el) {
     el.style.width = el.dataset.width + '%';
+  });
+  document.querySelectorAll('[data-pct]').forEach(function (el) {
+    el.style.width = el.dataset.pct + '%';
   });
 
   // ------------------------------------------------------------------

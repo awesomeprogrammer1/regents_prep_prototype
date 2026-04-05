@@ -6,7 +6,7 @@
   <title>{% block title %}Regents Prep{% endblock %}</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
 </head>
-<body>
+<body class="{% block body_class %}{% endblock %}">
   <header>
     <nav class="nav-bar">
       <a class="nav-brand" href="{{ url_for('index') }}">Regents Prep</a>
@@ -24,17 +24,17 @@
     </nav>
   </header>
 
-  <main>
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <div class="flash-messages">
-          {% for msg in messages %}
-            <p class="flash">{{ msg }}</p>
-          {% endfor %}
-        </div>
-      {% endif %}
-    {% endwith %}
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <div class="flash-messages">
+        {% for msg in messages %}
+          <p class="flash">{{ msg }}</p>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
 
+  <main>
     {% block content %}{% endblock %}
   </main>
 
@@ -46,4 +46,3 @@
 </body>
 </html>
 {# # #}
-
