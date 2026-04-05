@@ -10,7 +10,8 @@ CREATE TABLE IF NOT EXISTS questions (
     correct_answer TEXT NOT NULL,
     exam_year INTEGER NOT NULL,
     exam_session TEXT NOT NULL,
-    question_number INTEGER NOT NULL
+    question_number INTEGER NOT NULL,
+    question_type TEXT NOT NULL DEFAULT 'multiple_choice'
 );
 
 CREATE TABLE IF NOT EXISTS users (

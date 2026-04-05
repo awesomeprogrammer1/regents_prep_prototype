@@ -383,6 +383,177 @@ footer {
 }
 
 /* ========================================================
+   Dark mode
+======================================================== */
+body.dark {
+  --primary: #5b8dee;
+  --primary-dark: #3a6fd8;
+  --gray-50: #1e2330;
+  --gray-100: #252c3b;
+  --gray-200: #2e3852;
+  --gray-400: #8892a4;
+  --gray-600: #a0aec0;
+  --gray-800: #e2e8f0;
+  --yellow-bg: #2d2600;
+  --yellow-border: #b07800;
+  background: #131722;
+  color: #e2e8f0;
+}
+body.dark .nav-bar       { background: #1a2035; border-color: #2e3852; }
+body.dark .question-card { background: #1a2035; border-color: #2e3852; }
+body.dark .choice-label  { background: #1a2035; border-color: #2e3852; }
+body.dark .choice-label:hover { background: #1e2a4a; border-color: var(--primary); }
+body.dark .choice-selected    { background: #1e2a4a; border-color: var(--primary); }
+body.dark .auth-container     { background: #1a2035; border-color: #2e3852; }
+body.dark .auth-container input[type="text"],
+body.dark .auth-container input[type="password"] { background: #131722; color: #e2e8f0; border-color: #2e3852; }
+body.dark .card           { background: #1a2035; border-color: #2e3852; }
+body.dark .stat-card      { background: #1a2035; border-color: #2e3852; }
+body.dark .topic-table th { background: #1e2330; }
+body.dark .row-needs-work td { background: #2d1a1a; }
+body.dark footer          { border-color: #2e3852; color: #8892a4; }
+body.dark .flash          { background: #2d2600; border-color: #b07800; }
+body.dark .cta-section    { background: #1a2035; }
+body.dark .guest-note     { background: #1a2035; }
+body.dark .modal          { background: #1a2035; border-color: #2e3852; }
+body.dark .modal-overlay  { background: rgba(0,0,0,.7); }
+body.dark .choice-correct { background: #0d2e1a; border-color: var(--green); }
+body.dark .choice-wrong   { background: #2d1212; border-color: var(--red); }
+body.dark .grid-in-input  { background: #131722; color: #e2e8f0; border-color: #2e3852; }
+
+.dark-toggle {
+  background: none;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius);
+  padding: .25rem .55rem;
+  font-size: 1rem;
+  cursor: pointer;
+  color: var(--gray-600);
+  line-height: 1;
+  transition: background .15s;
+}
+.dark-toggle:hover { background: var(--gray-100); }
+
+/* ========================================================
+   Grid-in questions
+======================================================== */
+.topic-tag-row {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  margin-bottom: .75rem;
+  flex-wrap: wrap;
+}
+.topic-tag-row .topic-tag { margin-bottom: 0; }
+
+.grid-in-badge {
+  font-size: .72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  background: #ede9fe;
+  color: #5b21b6;
+  padding: .15rem .55rem;
+  border-radius: 99px;
+}
+body.dark .grid-in-badge { background: #2d1f5e; color: #c4b5fd; }
+
+.grid-in-help-btn {
+  background: none;
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  border-radius: var(--radius);
+  font-size: .78rem;
+  font-weight: 600;
+  padding: .2rem .65rem;
+  cursor: pointer;
+  margin-left: auto;
+}
+.grid-in-help-btn:hover { background: #eef2ff; }
+body.dark .grid-in-help-btn:hover { background: #1e2a4a; }
+
+.grid-in-input-wrap { margin-bottom: .5rem; }
+.grid-in-label {
+  display: block;
+  font-size: .88rem;
+  font-weight: 600;
+  margin-bottom: .4rem;
+  color: var(--gray-600);
+}
+.grid-in-input {
+  width: 100%;
+  max-width: 280px;
+  padding: .6rem .85rem;
+  border: 2px solid var(--primary);
+  border-radius: var(--radius);
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: .05em;
+}
+.grid-in-input:focus { outline: none; border-color: var(--primary-dark); box-shadow: 0 0 0 3px rgba(26,86,219,.15); }
+
+/* Grid-in feedback */
+.grid-in-feedback-wrap {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+}
+.grid-in-feedback-row { display: flex; align-items: center; gap: .6rem; font-size: .95rem; }
+.grid-in-feedback-label { font-weight: 600; color: var(--gray-600); min-width: 130px; }
+.grid-in-feedback-value {
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: .2rem .65rem;
+  border-radius: var(--radius);
+}
+.gf-correct { background: #dcfce7; color: #166534; }
+.gf-wrong   { background: #fee2e2; color: #991b1b; }
+body.dark .gf-correct { background: #0d2e1a; color: #6ee7a0; }
+body.dark .gf-wrong   { background: #2d1212; color: #fca5a5; }
+
+/* ========================================================
+   Grid-in help modal
+======================================================== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 1rem;
+}
+.modal-overlay[hidden] { display: none; }
+
+.modal {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 1.75rem;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 8px 32px rgba(0,0,0,.18);
+}
+.modal h3 { margin-bottom: .75rem; font-size: 1.1rem; }
+.modal > p { font-size: .92rem; margin-bottom: 1rem; color: var(--gray-600); }
+.modal .btn { margin-top: 1rem; }
+
+.modal-table { width: 100%; border-collapse: collapse; font-size: .88rem; margin-bottom: .75rem; }
+.modal-table th, .modal-table td { padding: .45rem .65rem; border-bottom: 1px solid var(--gray-200); text-align: left; }
+.modal-table th { font-size: .75rem; text-transform: uppercase; letter-spacing: .04em; color: var(--gray-600); background: var(--gray-50); }
+.modal-row-ok td  { background: #f0fff4; }
+.modal-row-bad td { background: #fff5f5; }
+body.dark .modal-row-ok td  { background: #0d2e1a; }
+body.dark .modal-row-bad td { background: #2d1212; }
+
+.modal-badge-ok  { background: #dcfce7; color: #166534; font-size: .75rem; font-weight: 700; padding: .1rem .5rem; border-radius: 99px; white-space: nowrap; }
+.modal-badge-bad { background: #fee2e2; color: #991b1b; font-size: .75rem; font-weight: 700; padding: .1rem .5rem; border-radius: 99px; white-space: nowrap; }
+
+.modal-tip { font-size: .82rem; color: var(--gray-600); background: var(--gray-50); padding: .5rem .75rem; border-radius: var(--radius); }
+body.dark .modal-tip { background: #1e2330; }
+
+/* ========================================================
    Responsive
 ======================================================== */
 @media (max-width: 600px) {

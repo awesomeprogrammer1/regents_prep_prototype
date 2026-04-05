@@ -10,35 +10,37 @@ def seed():
     database.init_db()
     conn = database.get_db()
 
-    existing = conn.execute('SELECT COUNT(*) FROM questions').fetchone()[0]
-    if existing > 0:
-        print(f'Database already has {existing} questions. Skipping seed.')
-        conn.close()
-        return
-
     with open(QUESTIONS_FILE, 'r', encoding='utf-8') as f:
         questions = json.load(f)
 
+    inserted = 0
     for q in questions:
+        # Use (subject, exam_year, exam_session, question_number) as a unique key
+        existing = conn.execute(
+            'SELECT id FROM questions WHERE subject=? AND exam_year=? AND exam_session=? AND question_number=?',
+            (q['subject'], q['exam_year'], q['exam_session'], q['question_number'])
+        ).fetchone()
+        if existing:
+            continue
         conn.execute(
             '''INSERT INTO questions
                (subject, topic, question_text, choice_a, choice_b, choice_c, choice_d,
-                correct_answer, exam_year, exam_session, question_number)
-               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''',
+                correct_answer, exam_year, exam_session, question_number, question_type)
+               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''',
             (
                 q['subject'], q['topic'], q['question_text'],
                 q['choice_a'], q['choice_b'], q['choice_c'], q['choice_d'],
-                q['correct_answer'], q['exam_year'], q['exam_session'], q['question_number'],
+                q['correct_answer'], q['exam_year'], q['exam_session'],
+                q['question_number'], q.get('question_type', 'multiple_choice'),
             )
         )
+        inserted += 1
 
     conn.commit()
-    count = conn.execute('SELECT COUNT(*) FROM questions').fetchone()[0]
+    total = conn.execute('SELECT COUNT(*) FROM questions').fetchone()[0]
     conn.close()
-    print(f'Seeded {count} questions.')
+    print(f'Inserted {inserted} new questions. Total: {total}.')
 
 
 if __name__ == '__main__':
     seed()
-
-

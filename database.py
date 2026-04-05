@@ -16,17 +16,31 @@ def init_db():
     with open(SCHEMA_PATH, 'r') as f:
         conn.executescript(f.read())
     conn.commit()
+    # Add question_type column to existing databases that predate it
+    try:
+        conn.execute("ALTER TABLE questions ADD COLUMN question_type TEXT NOT NULL DEFAULT 'multiple_choice'")
+        conn.commit()
+    except sqlite3.OperationalError:
+        pass  # Column already exists
     conn.close()
 
 
-def get_practice_questions(subject, limit=10):
+def get_practice_questions(subject, limit=10, grid_in_count=2):
+    import random
+    mc_limit = limit - grid_in_count
     conn = get_db()
-    rows = conn.execute(
-        'SELECT * FROM questions WHERE subject = ? ORDER BY RANDOM() LIMIT ?',
-        (subject, limit)
+    grid_ins = conn.execute(
+        "SELECT * FROM questions WHERE subject = ? AND question_type = 'grid_in' ORDER BY RANDOM() LIMIT ?",
+        (subject, grid_in_count)
+    ).fetchall()
+    mc = conn.execute(
+        "SELECT * FROM questions WHERE subject = ? AND question_type = 'multiple_choice' ORDER BY RANDOM() LIMIT ?",
+        (subject, mc_limit)
     ).fetchall()
     conn.close()
-    return [dict(r) for r in rows]
+    questions = [dict(r) for r in grid_ins] + [dict(r) for r in mc]
+    random.shuffle(questions)
+    return questions
 
 
 def get_question_by_id(question_id):

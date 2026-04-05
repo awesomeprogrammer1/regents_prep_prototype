@@ -9,22 +9,39 @@
     <p class="topic-tag">{{ question.topic }}</p>
     <p class="question-text">{{ question.question_text }}</p>
 
-    <div class="choices-review">
-      {% for letter, text in choices.items() %}
-      <div class="choice-review
-        {% if letter == question.correct_answer %} choice-correct
-        {% elif letter == selected and not is_correct %} choice-wrong
-        {% endif %}">
-        <span class="choice-key">{{ letter }}</span>
-        <span class="choice-text">{{ text }}</span>
-        {% if letter == question.correct_answer %}
-          <span class="badge badge-correct">Correct answer</span>
-        {% elif letter == selected and not is_correct %}
-          <span class="badge badge-wrong">Your answer</span>
+    {% if is_grid_in %}
+      <div class="grid-in-feedback-wrap">
+        <div class="grid-in-feedback-row">
+          <span class="grid-in-feedback-label">Your answer:</span>
+          <span class="grid-in-feedback-value {% if is_correct %}gf-correct{% else %}gf-wrong{% endif %}">
+            {{ selected if selected else '(blank)' }}
+          </span>
+        </div>
+        {% if not is_correct %}
+        <div class="grid-in-feedback-row">
+          <span class="grid-in-feedback-label">Correct answer:</span>
+          <span class="grid-in-feedback-value gf-correct">{{ question.correct_answer }}</span>
+        </div>
         {% endif %}
       </div>
-      {% endfor %}
-    </div>
+    {% else %}
+      <div class="choices-review">
+        {% for letter, text in choices.items() %}
+        <div class="choice-review
+          {% if letter == question.correct_answer %} choice-correct
+          {% elif letter == selected and not is_correct %} choice-wrong
+          {% endif %}">
+          <span class="choice-key">{{ letter }}</span>
+          <span class="choice-text">{{ text }}</span>
+          {% if letter == question.correct_answer %}
+            <span class="badge badge-correct">Correct answer</span>
+          {% elif letter == selected and not is_correct %}
+            <span class="badge badge-wrong">Your answer</span>
+          {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+    {% endif %}
 
     <div class="feedback-banner {% if is_correct %}feedback-correct{% else %}feedback-wrong{% endif %}">
       {% if is_correct %}
@@ -54,4 +71,3 @@
   </p>
 </div>
 {% endblock %}
-

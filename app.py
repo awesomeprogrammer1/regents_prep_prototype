@@ -23,6 +23,19 @@ def current_user():
     return None
 
 
+def check_grid_in(submitted, correct):
+    """Case-insensitive, whitespace-stripped comparison for grid-in answers.
+    Also normalises numeric equivalence (e.g. '4.0' == '4')."""
+    s = submitted.strip().lower()
+    c = correct.strip().lower()
+    if s == c:
+        return True
+    try:
+        return float(s) == float(c)
+    except ValueError:
+        return False
+
+
 def login_required(f):
     from functools import wraps
     @wraps(f)
@@ -149,13 +162,19 @@ def answer():
     index = session.get('question_index', 0)
     question_ids = session['question_ids']
     question_id = question_ids[index]
-    selected = request.form.get('answer', '').upper()
 
     q = database.get_question_by_id(question_id)
     if not q:
         return redirect(url_for('results'))
 
-    is_correct = selected == q['correct_answer'].upper()
+    is_grid_in = q.get('question_type') == 'grid_in'
+
+    if is_grid_in:
+        selected = request.form.get('grid_answer', '').strip()
+        is_correct = check_grid_in(selected, q['correct_answer'])
+    else:
+        selected = request.form.get('answer', '').upper()
+        is_correct = selected == q['correct_answer'].upper()
 
     user_id = session.get('user_id', GUEST_USER_ID)
     if user_id != GUEST_USER_ID:
@@ -180,6 +199,7 @@ def answer():
         selected=selected,
         is_correct=is_correct,
         choices=choices,
+        is_grid_in=is_grid_in,
         question_number=index + 1,
         total=len(question_ids),
         is_last=(index + 1 >= len(question_ids)),

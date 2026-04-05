@@ -9,17 +9,31 @@
   <p class="progress-label">Question {{ question_number }} of {{ total }}</p>
 
   <div class="question-card">
-    <p class="topic-tag">{{ question.topic }}</p>
+    <div class="topic-tag-row">
+      <p class="topic-tag">{{ question.topic }}</p>
+      {% if question.question_type == 'grid_in' %}
+        <span class="grid-in-badge">Grid-In</span>
+        <button type="button" class="grid-in-help-btn" id="open-grid-help" aria-label="How to enter grid-in answers">? How to answer</button>
+      {% endif %}
+    </div>
     <p class="question-text">{{ question.question_text }}</p>
 
     <form method="post" action="{{ url_for('answer') }}" id="answer-form">
-      {% for letter, text in [('A', question.choice_a), ('B', question.choice_b), ('C', question.choice_c), ('D', question.choice_d)] %}
-      <label class="choice-label">
-        <input type="radio" name="answer" value="{{ letter }}" required />
-        <span class="choice-key">{{ letter }}</span>
-        <span class="choice-text">{{ text }}</span>
-      </label>
-      {% endfor %}
+      {% if question.question_type == 'grid_in' %}
+        <div class="grid-in-input-wrap">
+          <label for="grid_answer" class="grid-in-label">Enter your answer:</label>
+          <input type="text" id="grid_answer" name="grid_answer" class="grid-in-input"
+                 autocomplete="off" placeholder="e.g. 4 or 3/2 or -1.5" required />
+        </div>
+      {% else %}
+        {% for letter, text in [('A', question.choice_a), ('B', question.choice_b), ('C', question.choice_c), ('D', question.choice_d)] %}
+        <label class="choice-label">
+          <input type="radio" name="answer" value="{{ letter }}" required />
+          <span class="choice-key">{{ letter }}</span>
+          <span class="choice-text">{{ text }}</span>
+        </label>
+        {% endfor %}
+      {% endif %}
 
       <div class="question-actions">
         <button type="submit" class="btn">Submit Answer</button>
@@ -30,5 +44,44 @@
   <p class="source-note">
     Source: {{ question.exam_session }} {{ question.exam_year }} Algebra I, Question {{ question.question_number }}
   </p>
+</div>
+
+<!-- Grid-in help modal -->
+<div class="modal-overlay" id="grid-help-modal" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <h3 id="modal-title">How to Enter Grid-In Answers</h3>
+    <p>Type your answer exactly as a number, fraction, or decimal. No units, no labels.</p>
+
+    <table class="modal-table">
+      <thead>
+        <tr><th>Answer</th><th>Type this</th><th>Result</th></tr>
+      </thead>
+      <tbody>
+        <tr class="modal-row-ok">
+          <td>4</td><td><code>4</code></td>
+          <td><span class="modal-badge-ok">Correct</span></td>
+        </tr>
+        <tr class="modal-row-ok">
+          <td>3/2</td><td><code>3/2</code> or <code>1.5</code></td>
+          <td><span class="modal-badge-ok">Correct</span></td>
+        </tr>
+        <tr class="modal-row-ok">
+          <td>-7</td><td><code>-7</code></td>
+          <td><span class="modal-badge-ok">Correct</span></td>
+        </tr>
+        <tr class="modal-row-bad">
+          <td>4</td><td><code>4 units</code> or <code>x=4</code></td>
+          <td><span class="modal-badge-bad">Marked wrong</span></td>
+        </tr>
+        <tr class="modal-row-bad">
+          <td>1/2</td><td><code>0,5</code> (comma instead of decimal)</td>
+          <td><span class="modal-badge-bad">Marked wrong</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="modal-tip">Fractions: type the numerator, a slash, then the denominator — <code>3/2</code></p>
+    <button type="button" class="btn" id="close-grid-help">Got it</button>
+  </div>
 </div>
 {% endblock %}
