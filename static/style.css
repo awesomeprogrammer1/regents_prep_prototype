@@ -184,6 +184,29 @@ body.home-page main { flex: 1; padding: 0; }
   position: relative;
 }
 
+/* Screen 2: map section */
+.home-screen-2 {
+  padding: 3rem 2rem 4rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Reveal-on-scroll: hidden until IntersectionObserver adds .is-visible */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(60px) scale(0.97);
+  filter: blur(4px);
+  transition: opacity .75s cubic-bezier(.22,1,.36,1),
+              transform .75s cubic-bezier(.22,1,.36,1),
+              filter .75s cubic-bezier(.22,1,.36,1);
+}
+.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
+
 /* ── Pop-out hover on interactive sections/cards ── */
 .home-map-section #map-container {
   transition: transform .2s cubic-bezier(.22,1,.36,1),
