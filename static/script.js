@@ -40,6 +40,27 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   // ------------------------------------------------------------------
+  // Reveal-on-scroll: watch for .reveal-on-scroll elements entering viewport
+  // Also triggers renderMap() when the map screen becomes visible
+  // ------------------------------------------------------------------
+  var revealEls = document.querySelectorAll('.reveal-on-scroll');
+  if (revealEls.length) {
+    var revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          if (entry.target.classList.contains('home-screen-2') &&
+              typeof renderMap === 'function') {
+            renderMap();
+          }
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    revealEls.forEach(function (el) { revealObserver.observe(el); });
+  }
+
+  // ------------------------------------------------------------------
   // Grid-in help modal
   // ------------------------------------------------------------------
   var modal   = document.getElementById('grid-help-modal');

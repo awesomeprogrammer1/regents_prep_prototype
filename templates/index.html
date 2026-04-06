@@ -4,64 +4,81 @@
 
 {% block content %}
 
-<!-- ── HERO ── -->
-<section class="home-hero">
-  <div class="home-hero-text">
-    <p class="home-hero-eyebrow">NYS Regents</p>
-    <h1 class="home-hero-title">Exam Prep</h1>
-    <p class="home-hero-sub">Practice real past Regents questions, track your weak topics, and study smarter — one question at a time.</p>
-    <a href="{{ url_for('practice', subject='Algebra I') }}" class="home-hero-btn">
-      <span class="home-hero-btn-play">&#9654;</span>
-      <span>
-        <span class="home-hero-btn-title">Start Algebra I</span>
-        <span class="home-hero-btn-sub">{{ subjects|length }} subject{% if subjects|length != 1 %}s{% endif %} available</span>
-      </span>
-    </a>
-  </div>
-  <div class="home-hero-art" aria-hidden="true">
-    <div class="art-circle art-circle-1"></div>
-    <div class="art-circle art-circle-2"></div>
-    <div class="art-icon">&#128218;</div>
-  </div>
-</section>
+<!-- ══════════════════════════════════════════════
+     SCREEN 1 — fills the viewport on first load
+════════════════════════════════════════════════ -->
+<div class="home-screen home-screen-1">
 
-<!-- ── SUBJECT CARDS ── -->
-<div class="home-subjects-wrap">
-  <p class="home-subjects-label">CHOOSE A SUBJECT</p>
-  <div class="home-subjects-row">
-    {% for subject in subjects %}
-    <a href="{{ url_for('practice', subject=subject) }}" class="subject-card subject-card-active">
-      <span class="subject-card-name">{{ subject }}</span>
-      <span class="subject-card-meta">Multiple choice + Grid-in</span>
-      <span class="subject-card-play">&#9654;</span>
-    </a>
-    {% endfor %}
-    <div class="subject-card subject-card-soon">
-      <span class="subject-card-name">Geometry</span>
-      <span class="subject-card-meta">Coming soon</span>
+  <!-- ── HERO ── -->
+  <section class="home-hero">
+    <div class="home-hero-text">
+      <p class="home-hero-eyebrow">NYS Regents</p>
+      <h1 class="home-hero-title">Exam Prep</h1>
+      <p class="home-hero-sub">Practice real past Regents questions, track your weak topics, and study smarter — one question at a time.</p>
+      <a href="{{ url_for('practice', subject='Algebra I') }}" class="home-hero-btn">
+        <span class="home-hero-btn-play">&#9654;</span>
+        <span>
+          <span class="home-hero-btn-title">Start Algebra I</span>
+          <span class="home-hero-btn-sub">{{ subjects|length }} subject{% if subjects|length != 1 %}s{% endif %} available</span>
+        </span>
+      </a>
     </div>
-    <div class="subject-card subject-card-soon">
-      <span class="subject-card-name">Living Environment</span>
-      <span class="subject-card-meta">Coming soon</span>
+    <div class="home-hero-art" aria-hidden="true">
+      <div class="art-circle art-circle-1"></div>
+      <div class="art-circle art-circle-2"></div>
+      <div class="art-icon">&#128218;</div>
     </div>
-    <div class="subject-card subject-card-soon">
-      <span class="subject-card-name">Earth Science</span>
-      <span class="subject-card-meta">Coming soon</span>
+  </section>
+
+  <!-- ── SUBJECT CARDS ── -->
+  <div class="home-subjects-wrap">
+    <p class="home-subjects-label">CHOOSE A SUBJECT</p>
+    <div class="home-subjects-row">
+      {% for subject in subjects %}
+      <a href="{{ url_for('practice', subject=subject) }}" class="subject-card subject-card-active">
+        <span class="subject-card-name">{{ subject }}</span>
+        <span class="subject-card-meta">Multiple choice + Grid-in</span>
+        <span class="subject-card-play">&#9654;</span>
+      </a>
+      {% endfor %}
+      <div class="subject-card subject-card-soon">
+        <span class="subject-card-name">Geometry</span>
+        <span class="subject-card-meta">Coming soon</span>
+      </div>
+      <div class="subject-card subject-card-soon">
+        <span class="subject-card-name">Living Environment</span>
+        <span class="subject-card-meta">Coming soon</span>
+      </div>
+      <div class="subject-card subject-card-soon">
+        <span class="subject-card-name">Earth Science</span>
+        <span class="subject-card-meta">Coming soon</span>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- ── NETWORK MAP ── -->
+  <!-- scroll hint -->
+  <div class="scroll-hint" aria-hidden="true">
+    <span class="scroll-hint-label">Scroll to explore</span>
+    <div class="scroll-hint-arrow"></div>
+  </div>
+
+</div><!-- end screen 1 -->
+
+<!-- ══════════════════════════════════════════════
+     SCREEN 2 — map, revealed on scroll
+════════════════════════════════════════════════ -->
+<div class="home-screen home-screen-2 reveal-on-scroll">
 <div class="home-map-section">
   <div id="map-container">
     <div class="map-header">
       <div class="map-header-eyebrow">NETWORK</div>
       <div class="map-header-title">700+ districts. One platform.</div>
-      <div class="map-header-sub">Accessable to students across the 62 NYS counties</div>
+      <div class="map-header-sub">Accessible to students across the 62 NYS counties</div>
     </div>
     <canvas id="cv"></canvas>
   </div>
 </div>
+</div><!-- end screen 2 -->
 
 <!-- ── SMALL CTA ── -->
 {% if not session.get('user_id') or session.get('user_id') == 0 %}
@@ -331,8 +348,10 @@ function renderMap() {
   setupTooltip(W, H);
 }
 
-renderMap();
-window.addEventListener('resize', renderMap);
+window.addEventListener('resize', function () {
+  var section = document.querySelector('.home-screen-2');
+  if (section && section.classList.contains('is-visible')) { renderMap(); }
+});
 </script>
 
 {% endblock %}

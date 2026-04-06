@@ -172,16 +172,87 @@ body:not(.home-page) main {
 body.home-page main { flex: 1; padding: 0; }
 
 /* ========================================================
-   HOMEPAGE — hero (full-width, no sidebar)
+   HOMEPAGE — scroll screens
+======================================================== */
+
+/* Screen 1: fills the viewport on first load */
+.home-screen-1 {
+  min-height: calc(100vh - 60px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+/* ── Pop-out hover on interactive sections/cards ── */
+.home-map-section #map-container {
+  transition: transform .2s cubic-bezier(.22,1,.36,1),
+              box-shadow .2s cubic-bezier(.22,1,.36,1);
+  cursor: default;
+}
+.home-map-section #map-container:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 20px 48px rgba(0,0,0,.32);
+}
+
+.subject-card {
+  transition: transform .18s cubic-bezier(.22,1,.36,1),
+              box-shadow .18s cubic-bezier(.22,1,.36,1) !important;
+}
+.subject-card-active:hover {
+  transform: translateY(-8px) scale(1.04) !important;
+  box-shadow: 0 16px 36px rgba(92,95,239,.45) !important;
+}
+.subject-card-soon { pointer-events: none; }
+
+.home-hero-btn {
+  transition: background .15s, transform .2s cubic-bezier(.22,1,.36,1),
+              box-shadow .2s cubic-bezier(.22,1,.36,1) !important;
+}
+.home-hero-btn:hover {
+  transform: translateY(-4px) scale(1.03) !important;
+  box-shadow: 0 16px 32px rgba(92,95,239,.5) !important;
+}
+
+/* Scroll hint */
+.scroll-hint {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .4rem;
+  opacity: .45;
+  animation: scroll-hint-fade 2s ease-in-out infinite;
+}
+.scroll-hint-label {
+  font-size: .72rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.scroll-hint-arrow {
+  width: 20px;
+  height: 20px;
+  border-right: 2px solid var(--text-muted);
+  border-bottom: 2px solid var(--text-muted);
+  transform: rotate(45deg);
+}
+@keyframes scroll-hint-fade {
+  0%, 100% { opacity: .3; transform: translateX(-50%) translateY(0); }
+  50%       { opacity: .7; transform: translateX(-50%) translateY(5px); }
+}
+
+/* ========================================================
+   HOMEPAGE — hero
 ======================================================== */
 .home-hero {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 2rem;
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 3rem 2rem 2rem;
+  padding: 2.5rem 2rem 1.5rem;
   width: 100%;
 }
 
@@ -340,9 +411,7 @@ body.home-page main { flex: 1; padding: 0; }
 
 /* ── SUBJECT CARDS ROW ── */
 .home-subjects-wrap {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 2rem 1.5rem;
+  padding: 0 0 1rem 0;
   width: 100%;
 }
 .home-subjects-label {
@@ -419,8 +488,8 @@ body.home-page main { flex: 1; padding: 0; }
 
 /* ── SMALL CTA BAR ── */
 .home-cta-bar {
-  max-width: 1100px;
-  margin: 1.5rem auto 0;
+  max-width: 860px;
+  margin: 0 auto;
   padding: .75rem 2rem;
   display: flex;
   align-items: center;
@@ -500,6 +569,11 @@ body.home-page main { flex: 1; padding: 0; }
   padding: 1.5rem;
   box-shadow: var(--shadow-md);
   background: var(--surface);
+  transition: transform .2s cubic-bezier(.22,1,.36,1), box-shadow .2s cubic-bezier(.22,1,.36,1);
+}
+.question-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 32px rgba(0,0,0,.13);
 }
 
 .topic-tag-row {
@@ -744,6 +818,11 @@ body.home-page main { flex: 1; padding: 0; }
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   background: var(--surface);
+  transition: transform .18s cubic-bezier(.22,1,.36,1), box-shadow .18s cubic-bezier(.22,1,.36,1);
+}
+.stat-card:hover {
+  transform: translateY(-5px) scale(1.04);
+  box-shadow: 0 12px 28px rgba(0,0,0,.13);
 }
 .stat-number { font-size: 1.75rem; font-weight: 800; color: var(--primary); }
 .stat-label  { font-size: .78rem; color: var(--text-muted); margin-top: .2rem; }
@@ -796,9 +875,6 @@ body.home-page main { flex: 1; padding: 0; }
    Homepage — inline network map
 ======================================================== */
 .home-map-section {
-  max-width: 1100px;
-  margin: 0 auto 1.5rem;
-  padding: 0 2rem;
   width: 100%;
 }
 
@@ -945,9 +1021,9 @@ body.dark .art-circle-2 { background: linear-gradient(135deg, #3d1a30 0%, #2d142
    Responsive
 ======================================================== */
 @media (max-width: 860px) {
-  .home-hero { padding: 2rem 1rem 1.5rem; }
+  .home-hero { padding: 1.5rem 1rem 1rem; }
   .home-hero-art { display: none; }
-  .home-subjects-wrap { padding: 0 1rem 1.25rem; }
+  .home-subjects-wrap { padding: 0 1rem 1rem; }
   .home-cta-bar { padding: .75rem 1rem; }
   .dash-layout {
     grid-template-columns: 1fr;
