@@ -71,9 +71,9 @@
 <div class="home-map-section">
   <div id="map-container">
     <div class="map-header">
-      <div class="map-header-eyebrow">NETWORK</div>
+      <div class="map-header-eyebrow">ACCESSABILITY</div>
       <div class="map-header-title">700+ districts. One platform.</div>
-      <div class="map-header-sub">Accessible to students across the 62 NYS counties</div>
+      <div class="map-header-sub">Created in NYC. Accessable across the 62 counties.</div>
     </div>
     <canvas id="cv"></canvas>
   </div>
@@ -98,12 +98,16 @@ const DOT_GLOW_COLOR   = 'rgba(123,111,232,0.35)';
 const DOT_CENTER_COLOR = 'rgba(255,255,255,0.95)';
 const DOT_GLOW_RADIUS  = 6;
 const DOT_CENTER_RADIUS = 2.5;
-const LINE_COLOR_BASE  = [123, 111, 232];
-const LINE_OPACITY_MIN = 0.30;
-const LINE_OPACITY_MAX = 0.70;
-const LINE_WIDTH       = 1.0;
-const MAX_EDGE_DISTANCE = 95;
-const MAX_NEIGHBORS    = 3;
+const LINE_COLOR_BASE       = [123, 111, 232];
+const LINE_OPACITY_NEAR     = 0.65;
+const LINE_OPACITY_FAR      = 0.20;
+const LINE_WIDTH            = 0.9;
+const HUB_GLOW_COLOR        = 'rgba(123,111,232,0.55)';
+const HUB_CENTER_COLOR      = '#ffffff';
+const HUB_GLOW_RADIUS       = 11;
+const HUB_CENTER_RADIUS     = 4.5;
+const HUB_RING_COLOR        = 'rgba(123,111,232,0.25)';
+const HUB_RING_RADIUS       = 18;
 
 const cv  = document.getElementById('cv');
 const ctx = cv.getContext('2d');
@@ -268,46 +272,60 @@ function drawPolygon(coords, W, H) {
   ctx.fillStyle = FILL_COLOR; ctx.fill();
 }
 
+const MANHATTAN_IDX = counties.findIndex(c => c.county === 'New York');
+
 function buildNetwork(pos) {
-  const edges = [];
-  for (let i = 0; i < pos.length; i++) {
-    let nb = [];
-    for (let j = 0; j < pos.length; j++) {
-      if (i === j) continue;
-      const dx = pos[i][0]-pos[j][0], dy = pos[i][1]-pos[j][1];
-      nb.push({ j, d: Math.sqrt(dx*dx+dy*dy) });
-    }
-    nb.sort((a,b) => a.d-b.d);
-    for (let k = 0; k < Math.min(MAX_NEIGHBORS, nb.length); k++) {
-      if (nb[k].d < MAX_EDGE_DISTANCE) {
-        const key = Math.min(i,nb[k].j)+'-'+Math.max(i,nb[k].j);
-        if (!edges.find(e => e.key===key))
-          edges.push({ key, from: i, to: nb[k].j, dist: nb[k].d });
-      }
-    }
-  }
+  const hub = pos[MANHATTAN_IDX];
+  let maxDist = 0;
+  const edges = counties.map((_, i) => {
+    if (i === MANHATTAN_IDX) return null;
+    const dx = hub[0] - pos[i][0], dy = hub[1] - pos[i][1];
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    if (dist > maxDist) maxDist = dist;
+    return { from: MANHATTAN_IDX, to: i, dist };
+  }).filter(Boolean);
+  // attach maxDist for opacity normalisation
+  edges._maxDist = maxDist;
   return edges;
 }
 
 function drawNetwork(pos, edges) {
+  const maxDist = edges._maxDist || 1;
+  const hub = pos[MANHATTAN_IDX];
   edges.forEach(e => {
-    const f = pos[e.from], t = pos[e.to];
-    const op = LINE_OPACITY_MIN + Math.max(0,(1-e.dist/MAX_EDGE_DISTANCE)*(LINE_OPACITY_MAX-LINE_OPACITY_MIN));
-    ctx.strokeStyle = `rgba(${LINE_COLOR_BASE.join(',')},${op})`;
+    const t = pos[e.to];
+    // farther counties get slightly more transparent lines
+    const t_norm = e.dist / maxDist;
+    const op = LINE_OPACITY_NEAR - (LINE_OPACITY_NEAR - LINE_OPACITY_FAR) * t_norm;
+    ctx.strokeStyle = `rgba(${LINE_COLOR_BASE.join(',')},${op.toFixed(3)})`;
     ctx.lineWidth = LINE_WIDTH;
-    const mx = (f[0]+t[0])/2, my = (f[1]+t[1])/2 - e.dist*0.035;
-    ctx.beginPath(); ctx.moveTo(f[0],f[1]);
-    ctx.quadraticCurveTo(mx, my, t[0], t[1]); ctx.stroke();
+    // gentle arc: control point lifted slightly toward manhattan
+    const mx = (hub[0] + t[0]) / 2;
+    const my = (hub[1] + t[1]) / 2 - e.dist * 0.08;
+    ctx.beginPath();
+    ctx.moveTo(hub[0], hub[1]);
+    ctx.quadraticCurveTo(mx, my, t[0], t[1]);
+    ctx.stroke();
   });
 }
 
 function drawDots(pos) {
-  pos.forEach(([x, y]) => {
-    ctx.beginPath(); ctx.arc(x, y, DOT_GLOW_RADIUS, 0, Math.PI*2);
+  // Draw regular county dots first
+  pos.forEach(([x, y], i) => {
+    if (i === MANHATTAN_IDX) return;
+    ctx.beginPath(); ctx.arc(x, y, DOT_GLOW_RADIUS, 0, Math.PI * 2);
     ctx.fillStyle = DOT_GLOW_COLOR; ctx.fill();
-    ctx.beginPath(); ctx.arc(x, y, DOT_CENTER_RADIUS, 0, Math.PI*2);
+    ctx.beginPath(); ctx.arc(x, y, DOT_CENTER_RADIUS, 0, Math.PI * 2);
     ctx.fillStyle = DOT_CENTER_COLOR; ctx.fill();
   });
+  // Draw Manhattan hub on top — larger, brighter
+  const [hx, hy] = pos[MANHATTAN_IDX];
+  ctx.beginPath(); ctx.arc(hx, hy, HUB_RING_RADIUS, 0, Math.PI * 2);
+  ctx.fillStyle = HUB_RING_COLOR; ctx.fill();
+  ctx.beginPath(); ctx.arc(hx, hy, HUB_GLOW_RADIUS, 0, Math.PI * 2);
+  ctx.fillStyle = HUB_GLOW_COLOR; ctx.fill();
+  ctx.beginPath(); ctx.arc(hx, hy, HUB_CENTER_RADIUS, 0, Math.PI * 2);
+  ctx.fillStyle = HUB_CENTER_COLOR; ctx.fill();
 }
 
 function setupTooltip(W, H) {
@@ -325,7 +343,8 @@ function setupTooltip(W, H) {
     let found = null;
     counties.forEach(c => {
       const [px, py] = project(c.lon, c.lat, W, H);
-      if (Math.abs(mx-px) < 9 && Math.abs(my-py) < 9) found = c;
+      const hitR = (c.county === 'New York') ? 18 : 9;
+      if (Math.abs(mx-px) < hitR && Math.abs(my-py) < hitR) found = c;
     });
     if (found) {
       tt.style.display = 'block';
