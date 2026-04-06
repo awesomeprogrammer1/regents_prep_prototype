@@ -2,12 +2,14 @@ import uuid
 from flask import Flask, render_template, redirect, url_for, request, session, flash
 from werkzeug.security import generate_password_hash, check_password_hash
 import database
+import seed_questions
 
 app = Flask(__name__)
 app.secret_key = 'dev-secret-change-in-production'
 
-# Initialise DB on every startup (safe: uses CREATE TABLE IF NOT EXISTS)
+# Initialise DB and seed questions on every startup (both are idempotent)
 database.init_db()
+seed_questions.seed()
 
 GUEST_USER_ID = 0
 SESSION_LENGTH = 10
