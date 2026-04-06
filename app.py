@@ -6,6 +6,9 @@ import database
 app = Flask(__name__)
 app.secret_key = 'dev-secret-change-in-production'
 
+# Initialise DB on every startup (safe: uses CREATE TABLE IF NOT EXISTS)
+database.init_db()
+
 GUEST_USER_ID = 0
 SESSION_LENGTH = 10
 
@@ -257,7 +260,6 @@ def dashboard():
 # ---------------------------------------------------------------------------
 
 if __name__ == '__main__':
-    database.init_db()
     app.run(debug=True)
 
 
