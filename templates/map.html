@@ -1,79 +1,24 @@
 {% extends "layout.html" %}
-{% block title %}Regents Prep{% endblock %}
-{% block body_class %}home-page{% endblock %}
+{% block title %}School Network Map — Regents Prep{% endblock %}
+{% block body_class %}map-page{% endblock %}
 
 {% block content %}
-
-<!-- ── HERO ── -->
-<section class="home-hero">
-  <div class="home-hero-text">
-    <p class="home-hero-eyebrow">NYS Regents</p>
-    <h1 class="home-hero-title">Exam Prep</h1>
-    <p class="home-hero-sub">Practice real past Regents questions, track your weak topics, and study smarter — one question at a time.</p>
-    <a href="{{ url_for('practice', subject='Algebra I') }}" class="home-hero-btn">
-      <span class="home-hero-btn-play">&#9654;</span>
-      <span>
-        <span class="home-hero-btn-title">Start Algebra I</span>
-        <span class="home-hero-btn-sub">{{ subjects|length }} subject{% if subjects|length != 1 %}s{% endif %} available</span>
-      </span>
-    </a>
-  </div>
-  <div class="home-hero-art" aria-hidden="true">
-    <div class="art-circle art-circle-1"></div>
-    <div class="art-circle art-circle-2"></div>
-    <div class="art-icon">&#128218;</div>
-  </div>
-</section>
-
-<!-- ── SUBJECT CARDS ── -->
-<div class="home-subjects-wrap">
-  <p class="home-subjects-label">CHOOSE A SUBJECT</p>
-  <div class="home-subjects-row">
-    {% for subject in subjects %}
-    <a href="{{ url_for('practice', subject=subject) }}" class="subject-card subject-card-active">
-      <span class="subject-card-name">{{ subject }}</span>
-      <span class="subject-card-meta">Multiple choice + Grid-in</span>
-      <span class="subject-card-play">&#9654;</span>
-    </a>
-    {% endfor %}
-    <div class="subject-card subject-card-soon">
-      <span class="subject-card-name">Geometry</span>
-      <span class="subject-card-meta">Coming soon</span>
-    </div>
-    <div class="subject-card subject-card-soon">
-      <span class="subject-card-name">Living Environment</span>
-      <span class="subject-card-meta">Coming soon</span>
-    </div>
-    <div class="subject-card subject-card-soon">
-      <span class="subject-card-name">Earth Science</span>
-      <span class="subject-card-meta">Coming soon</span>
-    </div>
-  </div>
-</div>
-
-<!-- ── NETWORK MAP ── -->
-<div class="home-map-section">
+<div class="map-page-wrap">
   <div id="map-container">
     <div class="map-header">
       <div class="map-header-eyebrow">NETWORK</div>
-      <div class="map-header-title">700+ districts. One platform.</div>
-      <div class="map-header-sub">Accessable to students across the 62 NYS counties</div>
+      <div class="map-header-title">Schools Across New York</div>
+      <div class="map-header-sub">62 counties. One school district per county.<br>See how the network connects.</div>
     </div>
     <canvas id="cv"></canvas>
+    <p class="map-source-note">Hover over a dot to see the county and school district seat.</p>
   </div>
 </div>
 
-<!-- ── SMALL CTA ── -->
-{% if not session.get('user_id') or session.get('user_id') == 0 %}
-<div class="home-cta-bar">
-  <span>Save your progress and track topics over time —</span>
-  <a href="{{ url_for('register') }}" class="home-cta-link">Create a free account</a>
-  <span class="home-cta-divider">or</span>
-  <a href="{{ url_for('practice', subject='Algebra I') }}" class="home-cta-ghost">continue as guest</a>
-</div>
-{% endif %}
-
 <script>
+// ============================================================
+// CONFIGURATION
+// ============================================================
 const BORDER_COLOR     = 'rgba(255,255,255,0.35)';
 const BORDER_WIDTH     = 1.3;
 const FILL_COLOR       = 'rgba(123,111,232,0.015)';
@@ -88,19 +33,40 @@ const LINE_WIDTH       = 1.0;
 const MAX_EDGE_DISTANCE = 95;
 const MAX_NEIGHBORS    = 3;
 
+// ============================================================
+// SETUP
+// ============================================================
 const cv  = document.getElementById('cv');
 const ctx = cv.getContext('2d');
 const ctr = document.getElementById('map-container');
 
+function init() {
+  const W = ctr.clientWidth;
+  const H = Math.round(W * 0.72);
+  cv.width  = W * 2;
+  cv.height = H * 2;
+  cv.style.width  = '100%';
+  cv.style.height = H + 'px';
+  ctx.setTransform(1,0,0,1,0,0);
+  ctx.scale(2, 2);
+  return { W, H };
+}
+
+// ============================================================
+// PROJECTION
+// ============================================================
 const pad = 45;
 const minLon = -80.1, maxLon = -71.3, minLat = 40.25, maxLat = 45.15;
 
 function project(lon, lat, W, H) {
-  const x = (lon - minLon) / (maxLon - minLon) * (W - pad*2) + pad;
-  const y = (H - pad) - (lat - minLat) / (maxLat - minLat) * (H - pad*2 + 10) + 5;
+  const x = (lon - minLon) / (maxLon - minLon) * (W - pad * 2) + pad;
+  const y = (H - pad) - (lat - minLat) / (maxLat - minLat) * (H - pad * 2 + 10) + 5;
   return [x, y];
 }
 
+// ============================================================
+// BORDER COORDINATES
+// ============================================================
 const mainland = [
   [-79.76278,42.000709],[-79.76278,42.269079],[-79.149363,42.55388],
   [-79.050778,42.690804],[-78.853608,42.783912],[-78.930531,42.953258],
@@ -149,6 +115,9 @@ const longIsland = [
   [-73.7941,40.7043],[-73.79,40.6847],[-73.775,40.6624],[-73.76,40.64]
 ];
 
+// ============================================================
+// COUNTY DATA
+// ============================================================
 const counties = [
   {county:"Albany",city:"Albany",lat:42.6526,lon:-73.7562},
   {county:"Allegany",city:"Belmont",lat:42.2231,lon:-78.0342},
@@ -214,57 +183,53 @@ const counties = [
   {county:"Yates",city:"Penn Yan",lat:42.6609,lon:-77.0539}
 ];
 
-function initCanvas() {
-  const W = ctr.clientWidth;
-  const H = Math.round(W * 0.72);
-  cv.width  = W * 2;
-  cv.height = H * 2;
-  cv.style.width  = '100%';
-  cv.style.height = H + 'px';
-  ctx.setTransform(1,0,0,1,0,0);
-  ctx.scale(2, 2);
-  return { W, H };
-}
-
+// ============================================================
+// DRAW HELPERS
+// ============================================================
 function drawBackground(W, H) {
-  const gx = W*0.50, gy = H*0.55;
-  const gr = ctx.createRadialGradient(gx, gy, 0, gx, gy, W*0.55);
+  const gx = W * 0.50, gy = H * 0.55;
+  const gr = ctx.createRadialGradient(gx, gy, 0, gx, gy, W * 0.55);
   gr.addColorStop(0, 'rgba(40,35,100,0.08)');
   gr.addColorStop(0.6, 'rgba(15,12,50,0.04)');
   gr.addColorStop(1, 'rgba(0,0,0,0)');
-  ctx.fillStyle = gr; ctx.fillRect(0, 0, W, H);
-  ctx.strokeStyle = 'rgba(80,120,220,0.05)'; ctx.lineWidth = 1.5;
+  ctx.fillStyle = gr;
+  ctx.fillRect(0, 0, W, H);
+  ctx.strokeStyle = 'rgba(80,120,220,0.05)';
+  ctx.lineWidth = 1.5;
   ctx.beginPath();
-  ctx.ellipse(gx, gy, W*0.50, H*0.50, 0, 0, Math.PI*2);
+  ctx.ellipse(gx, gy, W * 0.50, H * 0.50, 0, 0, Math.PI * 2);
   ctx.stroke();
 }
 
 function drawPolygon(coords, W, H) {
-  ctx.strokeStyle = BORDER_COLOR; ctx.lineWidth = BORDER_WIDTH;
+  ctx.strokeStyle = BORDER_COLOR;
+  ctx.lineWidth = BORDER_WIDTH;
   ctx.beginPath();
   coords.forEach((p, i) => {
     const [x, y] = project(p[0], p[1], W, H);
     i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
   });
-  ctx.closePath(); ctx.stroke();
-  ctx.fillStyle = FILL_COLOR; ctx.fill();
+  ctx.closePath();
+  ctx.stroke();
+  ctx.fillStyle = FILL_COLOR;
+  ctx.fill();
 }
 
 function buildNetwork(pos) {
   const edges = [];
   for (let i = 0; i < pos.length; i++) {
-    let nb = [];
+    let neighbors = [];
     for (let j = 0; j < pos.length; j++) {
       if (i === j) continue;
-      const dx = pos[i][0]-pos[j][0], dy = pos[i][1]-pos[j][1];
-      nb.push({ j, d: Math.sqrt(dx*dx+dy*dy) });
+      const dx = pos[i][0] - pos[j][0], dy = pos[i][1] - pos[j][1];
+      neighbors.push({ j, d: Math.sqrt(dx*dx + dy*dy) });
     }
-    nb.sort((a,b) => a.d-b.d);
-    for (let k = 0; k < Math.min(MAX_NEIGHBORS, nb.length); k++) {
-      if (nb[k].d < MAX_EDGE_DISTANCE) {
-        const key = Math.min(i,nb[k].j)+'-'+Math.max(i,nb[k].j);
-        if (!edges.find(e => e.key===key))
-          edges.push({ key, from: i, to: nb[k].j, dist: nb[k].d });
+    neighbors.sort((a,b) => a.d - b.d);
+    for (let k = 0; k < Math.min(MAX_NEIGHBORS, neighbors.length); k++) {
+      if (neighbors[k].d < MAX_EDGE_DISTANCE) {
+        const key = Math.min(i,neighbors[k].j)+'-'+Math.max(i,neighbors[k].j);
+        if (!edges.find(e => e.key === key))
+          edges.push({ key, from: i, to: neighbors[k].j, dist: neighbors[k].d });
       }
     }
   }
@@ -274,36 +239,45 @@ function buildNetwork(pos) {
 function drawNetwork(pos, edges) {
   edges.forEach(e => {
     const f = pos[e.from], t = pos[e.to];
-    const op = LINE_OPACITY_MIN + Math.max(0,(1-e.dist/MAX_EDGE_DISTANCE)*(LINE_OPACITY_MAX-LINE_OPACITY_MIN));
-    ctx.strokeStyle = `rgba(${LINE_COLOR_BASE.join(',')},${op})`;
+    const opacity = LINE_OPACITY_MIN + Math.max(0, (1 - e.dist / MAX_EDGE_DISTANCE) * (LINE_OPACITY_MAX - LINE_OPACITY_MIN));
+    ctx.strokeStyle = `rgba(${LINE_COLOR_BASE.join(',')},${opacity})`;
     ctx.lineWidth = LINE_WIDTH;
     const mx = (f[0]+t[0])/2, my = (f[1]+t[1])/2 - e.dist*0.035;
-    ctx.beginPath(); ctx.moveTo(f[0],f[1]);
-    ctx.quadraticCurveTo(mx, my, t[0], t[1]); ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(f[0], f[1]);
+    ctx.quadraticCurveTo(mx, my, t[0], t[1]);
+    ctx.stroke();
   });
 }
 
 function drawDots(pos) {
   pos.forEach(([x, y]) => {
-    ctx.beginPath(); ctx.arc(x, y, DOT_GLOW_RADIUS, 0, Math.PI*2);
-    ctx.fillStyle = DOT_GLOW_COLOR; ctx.fill();
-    ctx.beginPath(); ctx.arc(x, y, DOT_CENTER_RADIUS, 0, Math.PI*2);
-    ctx.fillStyle = DOT_CENTER_COLOR; ctx.fill();
+    ctx.beginPath();
+    ctx.arc(x, y, DOT_GLOW_RADIUS, 0, Math.PI*2);
+    ctx.fillStyle = DOT_GLOW_COLOR;
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(x, y, DOT_CENTER_RADIUS, 0, Math.PI*2);
+    ctx.fillStyle = DOT_CENTER_COLOR;
+    ctx.fill();
   });
 }
 
+// ============================================================
+// TOOLTIP
+// ============================================================
 function setupTooltip(W, H) {
   let tt = document.getElementById('map-tooltip');
   if (!tt) {
     tt = document.createElement('div');
     tt.id = 'map-tooltip';
     tt.style.cssText = 'position:absolute;display:none;background:rgba(10,12,30,0.93);border:1px solid rgba(123,111,232,0.45);border-radius:8px;padding:7px 12px;font-size:12px;color:#fff;pointer-events:none;z-index:10;line-height:1.5;';
-    ctr.appendChild(tt);
+    document.getElementById('map-container').appendChild(tt);
   }
   cv.onmousemove = e => {
     const r = cv.getBoundingClientRect();
-    const mx = (e.clientX-r.left)*(W/r.width);
-    const my = (e.clientY-r.top)*(H/r.height);
+    const mx = (e.clientX - r.left) * (W / r.width);
+    const my = (e.clientY - r.top)  * (H / r.height);
     let found = null;
     counties.forEach(c => {
       const [px, py] = project(c.lon, c.lat, W, H);
@@ -311,28 +285,33 @@ function setupTooltip(W, H) {
     });
     if (found) {
       tt.style.display = 'block';
-      tt.style.left = (e.clientX-r.left+14)+'px';
-      tt.style.top  = (e.clientY-r.top-10)+'px';
+      tt.style.left = (e.clientX - r.left + 14) + 'px';
+      tt.style.top  = (e.clientY - r.top  - 10) + 'px';
       tt.innerHTML  = `<span style="color:#7B6FE8;font-weight:600">${found.county} County</span><br><span style="color:rgba(255,255,255,0.6)">${found.city}</span>`;
-    } else { tt.style.display = 'none'; }
+    } else {
+      tt.style.display = 'none';
+    }
   };
   cv.onmouseleave = () => { tt.style.display = 'none'; };
 }
 
-function renderMap() {
-  const { W, H } = initCanvas();
+// ============================================================
+// RENDER
+// ============================================================
+function render() {
+  const { W, H } = init();
   ctx.clearRect(0, 0, W, H);
   drawBackground(W, H);
   drawPolygon(mainland, W, H);
   drawPolygon(longIsland, W, H);
-  const pos = counties.map(c => project(c.lon, c.lat, W, H));
-  drawNetwork(pos, buildNetwork(pos));
+  const pos   = counties.map(c => project(c.lon, c.lat, W, H));
+  const edges = buildNetwork(pos);
+  drawNetwork(pos, edges);
   drawDots(pos);
   setupTooltip(W, H);
 }
 
-renderMap();
-window.addEventListener('resize', renderMap);
+render();
+window.addEventListener('resize', render);
 </script>
-
 {% endblock %}

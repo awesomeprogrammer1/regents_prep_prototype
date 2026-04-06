@@ -793,6 +793,86 @@ body.home-page main { flex: 1; padding: 0; }
 .modal-tip { font-size: .82rem; color: var(--text-muted); background: var(--gray-50); padding: .5rem .75rem; border-radius: var(--radius); }
 
 /* ========================================================
+   Homepage — inline network map
+======================================================== */
+.home-map-section {
+  max-width: 1100px;
+  margin: 0 auto 1.5rem;
+  padding: 0 2rem;
+  width: 100%;
+}
+
+.home-map-section #map-container {
+  background: #060a14;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: var(--shadow-md);
+}
+
+/* ========================================================
+   Map page
+======================================================== */
+body.map-page { background: #060a14; }
+body.map-page main { padding: 0; max-width: 100%; }
+body.map-page footer { background: #060a14; border-color: rgba(255,255,255,.08); color: rgba(255,255,255,.3); }
+body.map-page .nav-bar { background: #060a14; border-color: rgba(255,255,255,.1); }
+body.map-page .nav-brand { color: #fff; }
+body.map-page .nav-links a { color: rgba(255,255,255,.7); }
+body.map-page .nav-links a:hover { color: #fff; }
+body.map-page .nav-user { background: rgba(255,255,255,.1); color: #fff; }
+body.map-page .dark-toggle { border-color: rgba(255,255,255,.15); color: rgba(255,255,255,.5); }
+
+.map-page-wrap {
+  padding: 1.5rem 1.5rem 0;
+}
+
+#map-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: #060a14;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+}
+
+.map-header {
+  padding: 1.5rem 1.75rem 1rem;
+}
+.map-header-eyebrow {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  color: #7B6FE8;
+  margin-bottom: 6px;
+}
+.map-header-title {
+  font-size: 26px;
+  font-weight: 500;
+  color: #fff;
+  line-height: 1.2;
+}
+.map-header-sub {
+  font-size: 13px;
+  color: rgba(255,255,255,.55);
+  margin-top: 6px;
+  line-height: 1.5;
+}
+
+#cv { display: block; width: 100%; }
+
+.map-source-note {
+  font-size: .75rem;
+  color: rgba(255,255,255,.3);
+  text-align: center;
+  padding: .75rem 1rem 1rem;
+}
+
+/* Dark mode: map teaser keeps its own dark bg */
+body.dark .home-map-teaser { background: var(--surface); }
+
+/* ========================================================
    Footer
 ======================================================== */
 footer {

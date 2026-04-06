@@ -241,6 +241,11 @@ def results():
     )
 
 
+@app.route('/map')
+def network_map():
+    return render_template('map.html')
+
+
 @app.route('/dashboard')
 @login_required
 def dashboard():
