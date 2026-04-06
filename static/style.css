@@ -223,7 +223,7 @@ body.home-page main { flex: 1; padding: 0; }
               box-shadow .18s cubic-bezier(.22,1,.36,1) !important;
 }
 .subject-card-active:hover {
-  transform: translateY(-8px) scale(1.04) !important;
+  transform: translateY(-8px) !important;
   box-shadow: 0 16px 36px rgba(92,95,239,.45) !important;
 }
 .subject-card-soon { pointer-events: none; }
@@ -444,12 +444,18 @@ body.home-page main { flex: 1; padding: 0; }
   color: var(--text-muted);
   margin-bottom: 1rem;
 }
+.home-subjects-scroll {
+  overflow-x: auto;
+  padding-top: 14px;   /* space for the card to pop into */
+  margin-top: -14px;   /* cancel the visual shift */
+  padding-bottom: 6px;
+  scrollbar-width: thin;
+}
+
 .home-subjects-row {
   display: flex;
   gap: 1rem;
-  overflow-x: auto;
   padding-bottom: .5rem;
-  scrollbar-width: thin;
 }
 
 .subject-card {
@@ -483,6 +489,7 @@ body.home-page main { flex: 1; padding: 0; }
 }
 .subject-card-soon:hover { transform: none; box-shadow: var(--shadow); }
 
+
 .subject-card-name {
   font-weight: 700;
   font-size: .95rem;
@@ -507,6 +514,17 @@ body.home-page main { flex: 1; padding: 0; }
   justify-content: center;
   font-size: .65rem;
   color: #fff;
+  transition: background .2s, color .2s;
+}
+.subject-card-play.spinning {
+  background: transparent;
+  border: 2.5px solid rgba(255,255,255,.3);
+  border-top-color: #fff;
+  color: transparent;
+  animation: card-spin .7s linear infinite;
+}
+@keyframes card-spin {
+  to { transform: rotate(360deg); }
 }
 
 /* ── SMALL CTA BAR ── */
@@ -1037,6 +1055,17 @@ body.dark .modal-row-bad td { background: #2d1212; }
 body.dark .modal-tip { background: #1e2338; }
 body.dark .subject-card-soon { background: #181c2e; border-color: #252a40; }
 body.dark .home-cta-bar { border-color: #252a40; }
+
+/* ── Page transition overlay ── */
+.page-transition {
+  position: fixed;
+  inset: 0;
+  background: var(--primary);
+  z-index: 9999;
+  pointer-events: none;
+  transform: translateY(100%);  /* starts below viewport */
+  will-change: transform;
+}
 body.dark .art-circle-1 { background: linear-gradient(135deg, #2d2060 0%, #1e265a 100%); }
 body.dark .art-circle-2 { background: linear-gradient(135deg, #3d1a30 0%, #2d1428 100%); }
 

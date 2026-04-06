@@ -1,3 +1,69 @@
+// ------------------------------------------------------------------
+// Page transition — card scales up to fill screen, then slides off top.
+// ------------------------------------------------------------------
+(function () {
+  var overlay = document.getElementById('page-transition');
+  if (!overlay) return;
+
+  var SPIN_DELAY = 400; // ms  spinner runs before expansion begins
+  var EXPAND     = 500; // ms  card → fullscreen
+  var REVEAL     = 2000; // ms  fullscreen → slides off top (on next page)
+  var EASE     = 'cubic-bezier(.22,1,.36,1)';
+
+  // ── On arrival at new page: overlay is covering screen, slide it off the top ──
+  if (sessionStorage.getItem('page-transition') === '1') {
+    sessionStorage.removeItem('page-transition');
+    overlay.style.transition = 'none';
+    overlay.style.transform  = 'translateY(0)';
+    overlay.style.borderRadius = '0';
+    overlay.getBoundingClientRect(); // force reflow
+    overlay.style.transition = 'transform ' + REVEAL + 'ms ' + EASE;
+    overlay.style.transform  = 'translateY(-100%)';
+  }
+
+  // ── On card click: size the overlay up from the card, then navigate ──
+  document.addEventListener('click', function (e) {
+    var card = e.target.closest('.subject-card-active');
+    if (!card || !card.href) return;
+    e.preventDefault();
+    var dest = card.href;
+
+    var rect = card.getBoundingClientRect();
+    var vw = window.innerWidth;
+    var vh = window.innerHeight;
+
+    // Scale factors so the fullscreen overlay appears card-sized
+    var sx = rect.width  / vw;
+    var sy = rect.height / vh;
+
+    // Translation so the overlay is centred on the card
+    var tx = (rect.left + rect.width  / 2) - vw / 2;
+    var ty = (rect.top  + rect.height / 2) - vh / 2;
+
+    // Border-radius that looks like 16px after scaling
+    var startRadius = Math.round(16 / Math.min(sx, sy)) + 'px';
+
+    // Start spinner on the play circle
+    var playEl = card.querySelector('.subject-card-play');
+    if (playEl) playEl.classList.add('spinning');
+
+    // After spin delay, snap overlay to card then expand to fill screen
+    setTimeout(function () {
+      overlay.style.transition   = 'none';
+      overlay.style.transform    = 'translate(' + tx + 'px,' + ty + 'px) scale(' + sx + ',' + sy + ')';
+      overlay.style.borderRadius = startRadius;
+      overlay.getBoundingClientRect(); // force reflow
+
+      overlay.style.transition   = 'transform ' + EXPAND + 'ms ' + EASE + ', border-radius ' + EXPAND + 'ms ease';
+      overlay.style.transform    = 'translate(0,0) scale(1)';
+      overlay.style.borderRadius = '0px';
+
+      sessionStorage.setItem('page-transition', '1');
+      setTimeout(function () { window.location.href = dest; }, EXPAND);
+    }, SPIN_DELAY);
+  });
+})();
+
 document.addEventListener('DOMContentLoaded', function () {
 
   // ------------------------------------------------------------------

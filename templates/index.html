@@ -18,7 +18,7 @@
       <a href="{{ url_for('practice', subject='Algebra I') }}" class="home-hero-btn">
         <span class="home-hero-btn-play">&#9654;</span>
         <span>
-          <span class="home-hero-btn-title">Start Algebra I</span>
+          <span class="home-hero-btn-title">Get Started</span>
           <span class="home-hero-btn-sub">{{ subjects|length }} subject{% if subjects|length != 1 %}s{% endif %} available</span>
         </span>
       </a>
@@ -33,6 +33,7 @@
   <!-- ── SUBJECT CARDS ── -->
   <div class="home-subjects-wrap">
     <p class="home-subjects-label">CHOOSE A SUBJECT</p>
+    <div class="home-subjects-scroll">
     <div class="home-subjects-row">
       {% for subject in subjects %}
       <a href="{{ url_for('practice', subject=subject) }}" class="subject-card subject-card-active">
@@ -53,6 +54,7 @@
         <span class="subject-card-name">Earth Science</span>
         <span class="subject-card-meta">Coming soon</span>
       </div>
+    </div>
     </div>
   </div>
 
