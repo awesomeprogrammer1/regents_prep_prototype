@@ -11,7 +11,8 @@ CREATE TABLE IF NOT EXISTS questions (
     exam_year INTEGER NOT NULL,
     exam_session TEXT NOT NULL,
     question_number INTEGER NOT NULL,
-    question_type TEXT NOT NULL DEFAULT 'multiple_choice'
+    question_type TEXT NOT NULL DEFAULT 'multiple_choice',
+    explanation TEXT NOT NULL DEFAULT 'To Be Changed'
 );
 
 CREATE TABLE IF NOT EXISTS users (

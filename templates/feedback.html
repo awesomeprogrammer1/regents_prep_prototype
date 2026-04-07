@@ -51,6 +51,17 @@
       {% endif %}
     </div>
 
+    {% if not is_correct %}
+    <div class="explain-section">
+      <button class="explain-toggle" id="explain-toggle" aria-expanded="false">
+        <span class="explain-toggle-icon">&#9660;</span> Explain why
+      </button>
+      <div class="explain-body" id="explain-body" hidden>
+        <p>{{ question.explanation }}</p>
+      </div>
+    </div>
+    {% endif %}
+
     {% if is_guest %}
     <p class="guest-note">
       <a href="{{ url_for('register') }}">Create a free account</a> to save your results and track topic performance.

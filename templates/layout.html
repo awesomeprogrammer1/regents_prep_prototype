@@ -6,7 +6,7 @@
   <title>{% block title %}Regents Prep{% endblock %}</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
 </head>
-<body class="{% block body_class %}{% endblock %}">
+<body class="{% block body_class %}{% endblock %}"{% if session.get('user_id') == 0 and session.get('question_ids') %} data-guest-warn="1"{% endif %}>
   <header>
     <nav class="nav-bar">
       <a class="nav-brand" href="{{ url_for('index') }}">Regents Prep</a>

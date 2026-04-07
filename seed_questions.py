@@ -21,17 +21,23 @@ def seed():
             (q['subject'], q['exam_year'], q['exam_session'], q['question_number'])
         ).fetchone()
         if existing:
+            # Update explanation in case it changed
+            conn.execute(
+                'UPDATE questions SET explanation=? WHERE subject=? AND exam_year=? AND exam_session=? AND question_number=?',
+                (q.get('explanation', 'To Be Changed'), q['subject'], q['exam_year'], q['exam_session'], q['question_number'])
+            )
             continue
         conn.execute(
             '''INSERT INTO questions
                (subject, topic, question_text, choice_a, choice_b, choice_c, choice_d,
-                correct_answer, exam_year, exam_session, question_number, question_type)
-               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''',
+                correct_answer, exam_year, exam_session, question_number, question_type, explanation)
+               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''',
             (
                 q['subject'], q['topic'], q['question_text'],
                 q['choice_a'], q['choice_b'], q['choice_c'], q['choice_d'],
                 q['correct_answer'], q['exam_year'], q['exam_session'],
                 q['question_number'], q.get('question_type', 'multiple_choice'),
+                q.get('explanation', 'To Be Changed'),
             )
         )
         inserted += 1

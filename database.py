@@ -22,6 +22,12 @@ def init_db():
         conn.commit()
     except sqlite3.OperationalError:
         pass  # Column already exists
+    # Add explanation column to existing databases that predate it
+    try:
+        conn.execute("ALTER TABLE questions ADD COLUMN explanation TEXT NOT NULL DEFAULT 'To Be Changed'")
+        conn.commit()
+    except sqlite3.OperationalError:
+        pass  # Column already exists
     conn.close()
 
 

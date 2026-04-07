@@ -6,7 +6,7 @@
   if (!overlay) return;
 
   var SPIN_DELAY = 400; // ms  spinner runs before expansion begins
-  var EXPAND     = 500; // ms  card → fullscreen
+  var EXPAND     = 1200; // ms  card → fullscreen
   var REVEAL     = 2000; // ms  fullscreen → slides off top (on next page)
   var EASE     = 'cubic-bezier(.22,1,.36,1)';
 
@@ -67,6 +67,21 @@
 document.addEventListener('DOMContentLoaded', function () {
 
   // ------------------------------------------------------------------
+  // Guest mid-session navigation warning
+  // ------------------------------------------------------------------
+  if (document.body.dataset.guestWarn) {
+    var navLinks = document.querySelectorAll('.nav-brand, .nav-links a');
+    navLinks.forEach(function (link) {
+      link.addEventListener('click', function (e) {
+        if (!confirm('Are you sure you want to leave? You\'ll lose your current practice session.')) {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+        }
+      });
+    });
+  }
+
+  // ------------------------------------------------------------------
   // Dark mode — persist preference in localStorage
   // ------------------------------------------------------------------
   var darkToggle = document.getElementById('dark-toggle');
@@ -124,6 +139,19 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }, { threshold: 0.1 });
     revealEls.forEach(function (el) { revealObserver.observe(el); });
+  }
+
+  // ------------------------------------------------------------------
+  // "Explain why" toggle
+  // ------------------------------------------------------------------
+  var explainToggle = document.getElementById('explain-toggle');
+  var explainBody   = document.getElementById('explain-body');
+  if (explainToggle && explainBody) {
+    explainToggle.addEventListener('click', function () {
+      var expanded = explainToggle.getAttribute('aria-expanded') === 'true';
+      explainToggle.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+      explainBody.hidden = expanded;
+    });
   }
 
   // ------------------------------------------------------------------

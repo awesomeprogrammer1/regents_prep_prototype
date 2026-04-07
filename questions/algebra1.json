@@ -10,7 +10,8 @@
     "correct_answer": "B",
     "exam_year": 2024,
     "exam_session": "June",
-    "question_number": 1
+    "question_number": 1,
+    "explanation": "Subtract 7 from both sides: 3x = 15. Divide by 3: x = 5."
   },
   {
     "subject": "Algebra I",
@@ -23,20 +24,22 @@
     "correct_answer": "A",
     "exam_year": 2024,
     "exam_session": "June",
-    "question_number": 2
+    "question_number": 2,
+    "explanation": "Distribute: 2x - 8 = 3x + 1. Subtract 2x: -8 = x + 1. Subtract 1: x = -9."
   },
   {
     "subject": "Algebra I",
     "topic": "Linear Equations & Inequalities",
     "question_text": "Which inequality represents the statement 'five less than twice a number is at most 11'?",
     "choice_a": "2n - 5 > 11",
-    "choice_b": "2n - 5 \u2265 11",
+    "choice_b": "2n - 5 ≥ 11",
     "choice_c": "2n - 5 < 11",
-    "choice_d": "2n - 5 \u2264 11",
+    "choice_d": "2n - 5 ≤ 11",
     "correct_answer": "D",
     "exam_year": 2024,
     "exam_session": "June",
-    "question_number": 3
+    "question_number": 3,
+    "explanation": "\"Twice a number\" = 2n. \"Five less than\" means subtract 5, giving 2n - 5. \"At most 11\" means ≤, so the inequality is 2n - 5 ≤ 11."
   },
   {
     "subject": "Algebra I",
@@ -49,25 +52,27 @@
     "correct_answer": "B",
     "exam_year": 2024,
     "exam_session": "June",
-    "question_number": 4
+    "question_number": 4,
+    "explanation": "Subtract 4: -3x > 9. Divide by -3 and flip the inequality sign (always flip when dividing by a negative): x < -3."
   },
   {
     "subject": "Algebra I",
     "topic": "Linear Equations & Inequalities",
     "question_text": "A cell phone plan charges $30 per month plus $0.10 per text. Maria's bill was at most $45. Which inequality represents the maximum number of texts, t, she could have sent?",
-    "choice_a": "30 + 0.10t \u2265 45",
-    "choice_b": "30 + 0.10t \u2264 45",
-    "choice_c": "0.10t \u2264 45",
-    "choice_d": "30t + 0.10 \u2264 45",
+    "choice_a": "30 + 0.10t ≥ 45",
+    "choice_b": "30 + 0.10t ≤ 45",
+    "choice_c": "0.10t ≤ 45",
+    "choice_d": "30t + 0.10 ≤ 45",
     "correct_answer": "B",
     "exam_year": 2024,
     "exam_session": "June",
-    "question_number": 5
+    "question_number": 5,
+    "explanation": "Total bill = 30 + 0.10t. \"At most $45\" means ≤ 45, so 30 + 0.10t ≤ 45. The $30 is a fixed monthly fee, not per text, ruling out C and D."
   },
   {
     "subject": "Linear Equations & Inequalities",
     "topic": "Linear Equations & Inequalities",
-    "question_text": "What is the solution to the equation \u00bd x + 3 = 7?",
+    "question_text": "What is the solution to the equation ½ x + 3 = 7?",
     "choice_a": "x = 2",
     "choice_b": "x = 5",
     "choice_c": "x = 8",
@@ -75,7 +80,8 @@
     "correct_answer": "C",
     "exam_year": 2025,
     "exam_session": "January",
-    "question_number": 1
+    "question_number": 1,
+    "explanation": "Subtract 3: ½x = 4. Multiply both sides by 2: x = 8."
   },
   {
     "subject": "Algebra I",
@@ -88,7 +94,8 @@
     "correct_answer": "A",
     "exam_year": 2024,
     "exam_session": "June",
-    "question_number": 6
+    "question_number": 6,
+    "explanation": "Set equal: 2x + 1 = -x + 7. Add x: 3x = 6, x = 2. Plug back in: y = 2(2) + 1 = 5. Solution: (2, 5)."
   },
   {
     "subject": "Algebra I",
@@ -101,7 +108,8 @@
     "correct_answer": "B",
     "exam_year": 2024,
     "exam_session": "June",
-    "question_number": 7
+    "question_number": 7,
+    "explanation": "Add the equations to eliminate y: 4x = 12, x = 3. Substitute into x - y = 2: y = 1. Solution: (3, 1)."
   },
   {
     "subject": "Algebra I",
@@ -114,12 +122,13 @@
     "correct_answer": "A",
     "exam_year": 2025,
     "exam_session": "January",
-    "question_number": 5
+    "question_number": 5,
+    "explanation": "Let p = pens, n = notebooks. System: p + n = 8 and 2p + 5n = 31. Sub n = 8 - p: 2p + 40 - 5p = 31 → -3p = -9 → p = 3."
   },
   {
     "subject": "Algebra I",
     "topic": "Systems of Equations",
-    "question_text": "The system of equations y = x\u00b2 - 4 and y = x + 2 has solutions at x =",
+    "question_text": "The system of equations y = x² - 4 and y = x + 2 has solutions at x =",
     "choice_a": "x = -2 and x = 3",
     "choice_b": "x = -3 and x = 2",
     "choice_c": "x = 2 and x = 4",
@@ -127,7 +136,8 @@
     "correct_answer": "A",
     "exam_year": 2025,
     "exam_session": "January",
-    "question_number": 6
+    "question_number": 6,
+    "explanation": "Set equal: x² - 4 = x + 2. Rearrange: x² - x - 6 = 0. Factor: (x - 3)(x + 2) = 0, so x = 3 or x = -2."
   },
   {
     "subject": "Algebra I",
@@ -140,7 +150,8 @@
     "correct_answer": "C",
     "exam_year": 2024,
     "exam_session": "June",
-    "question_number": 8
+    "question_number": 8,
+    "explanation": "A function requires every x-value to map to exactly one y-value. A: x=1 goes to 2 and 3. B: x=2 goes to 3 and 5. D: x=0 goes to 1 and 2. Only C has all unique x-values."
   },
   {
     "subject": "Algebra I",
@@ -153,25 +164,27 @@
     "correct_answer": "A",
     "exam_year": 2024,
     "exam_session": "June",
-    "question_number": 9
+    "question_number": 9,
+    "explanation": "Substitute x = 4: f(4) = 3(4) - 5 = 12 - 5 = 7."
   },
   {
     "subject": "Algebra I",
     "topic": "Functions (Linear & Exponential)",
     "question_text": "A bacteria population doubles every hour. If there are 50 bacteria at time t = 0, which function models the population P after t hours?",
     "choice_a": "P(t) = 50 + 2t",
-    "choice_b": "P(t) = 50 \u00b7 2^t",
-    "choice_c": "P(t) = 2 \u00b7 50^t",
+    "choice_b": "P(t) = 50 · 2^t",
+    "choice_c": "P(t) = 2 · 50^t",
     "choice_d": "P(t) = 100t",
     "correct_answer": "B",
     "exam_year": 2024,
     "exam_session": "June",
-    "question_number": 10
+    "question_number": 10,
+    "explanation": "Doubling each hour is exponential growth. Model: P(t) = 50 · 2^t. Choice A grows linearly. Choice C swaps the base and initial value."
   },
   {
     "subject": "Algebra I",
     "topic": "Functions (Linear & Exponential)",
-    "question_text": "A function is defined as f(x) = 2x\u00b2 - 3. What is f(-2)?",
+    "question_text": "A function is defined as f(x) = 2x² - 3. What is f(-2)?",
     "choice_a": "-11",
     "choice_b": "1",
     "choice_c": "5",
@@ -179,7 +192,8 @@
     "correct_answer": "C",
     "exam_year": 2025,
     "exam_session": "January",
-    "question_number": 7
+    "question_number": 7,
+    "explanation": "Substitute x = -2: f(-2) = 2(-2)² - 3 = 2(4) - 3 = 5. Key detail: (-2)² = +4, not -4."
   },
   {
     "subject": "Algebra I",
@@ -192,12 +206,13 @@
     "correct_answer": "A",
     "exam_year": 2025,
     "exam_session": "January",
-    "question_number": 8
+    "question_number": 8,
+    "explanation": "Rate of change in a linear function equals the slope. f(x) has slope 4, g(x) has slope 3. Since 4 > 3, f(x) wins. The y-intercept doesn't affect rate of change."
   },
   {
     "subject": "Algebra I",
     "topic": "Quadratics",
-    "question_text": "What are the zeros of f(x) = x\u00b2 - 5x + 6?",
+    "question_text": "What are the zeros of f(x) = x² - 5x + 6?",
     "choice_a": "x = 1 and x = 6",
     "choice_b": "x = 2 and x = 3",
     "choice_c": "x = -2 and x = -3",
@@ -205,25 +220,27 @@
     "correct_answer": "B",
     "exam_year": 2024,
     "exam_session": "June",
-    "question_number": 11
+    "question_number": 11,
+    "explanation": "Factor: find two numbers that multiply to +6 and add to -5 → -2 and -3. So (x - 2)(x - 3) = 0, zeros at x = 2 and x = 3."
   },
   {
     "subject": "Algebra I",
     "topic": "Quadratics",
     "question_text": "Which equation has roots of 4 and -3?",
-    "choice_a": "x\u00b2 - x - 12 = 0",
-    "choice_b": "x\u00b2 + x - 12 = 0",
-    "choice_c": "x\u00b2 - x + 12 = 0",
-    "choice_d": "x\u00b2 + x + 12 = 0",
+    "choice_a": "x² - x - 12 = 0",
+    "choice_b": "x² + x - 12 = 0",
+    "choice_c": "x² - x + 12 = 0",
+    "choice_d": "x² + x + 12 = 0",
     "correct_answer": "A",
     "exam_year": 2024,
     "exam_session": "June",
-    "question_number": 12
+    "question_number": 12,
+    "explanation": "Roots 4 and -3 mean factors (x - 4)(x + 3). Expand: x² + 3x - 4x - 12 = x² - x - 12 = 0."
   },
   {
     "subject": "Algebra I",
     "topic": "Quadratics",
-    "question_text": "The parabola y = x\u00b2 - 4x + 3 has its vertex at",
+    "question_text": "The parabola y = x² - 4x + 3 has its vertex at",
     "choice_a": "(2, -1)",
     "choice_b": "(-2, 15)",
     "choice_c": "(4, 3)",
@@ -231,12 +248,13 @@
     "correct_answer": "A",
     "exam_year": 2024,
     "exam_session": "June",
-    "question_number": 13
+    "question_number": 13,
+    "explanation": "Axis of symmetry: x = -b/(2a) = 4/2 = 2. Plug in: y = 4 - 8 + 3 = -1. Vertex: (2, -1)."
   },
   {
     "subject": "Algebra I",
     "topic": "Quadratics",
-    "question_text": "Using the quadratic formula, what are the solutions to x\u00b2 - 6x + 5 = 0?",
+    "question_text": "Using the quadratic formula, what are the solutions to x² - 6x + 5 = 0?",
     "choice_a": "x = 1 and x = 5",
     "choice_b": "x = -1 and x = -5",
     "choice_c": "x = 2 and x = 3",
@@ -244,12 +262,13 @@
     "correct_answer": "A",
     "exam_year": 2025,
     "exam_session": "January",
-    "question_number": 10
+    "question_number": 10,
+    "explanation": "Factor: two numbers multiply to +5, add to -6 → -1 and -5. So (x - 1)(x - 5) = 0, x = 1 and x = 5. Confirm with quadratic formula: (6 ± √16)/2 = (6 ± 4)/2."
   },
   {
     "subject": "Algebra I",
     "topic": "Quadratics",
-    "question_text": "A ball is thrown upward. Its height h in feet after t seconds is h = -16t\u00b2 + 48t + 4. What is the maximum height the ball reaches?",
+    "question_text": "A ball is thrown upward. Its height h in feet after t seconds is h = -16t² + 48t + 4. What is the maximum height the ball reaches?",
     "choice_a": "36 feet",
     "choice_b": "40 feet",
     "choice_c": "48 feet",
@@ -257,72 +276,78 @@
     "correct_answer": "B",
     "exam_year": 2025,
     "exam_session": "January",
-    "question_number": 11
+    "question_number": 11,
+    "explanation": "Max height at vertex. t = -48/(2 · -16) = 1.5 s. h(1.5) = -16(2.25) + 72 + 4 = -36 + 76 = 40 feet."
   },
   {
     "subject": "Algebra I",
     "topic": "Polynomials",
     "question_text": "What is the product of (x + 3)(x - 5)?",
-    "choice_a": "x\u00b2 + 8x - 15",
-    "choice_b": "x\u00b2 - 2x - 15",
-    "choice_c": "x\u00b2 - 8x + 15",
-    "choice_d": "x\u00b2 + 2x + 15",
+    "choice_a": "x² + 8x - 15",
+    "choice_b": "x² - 2x - 15",
+    "choice_c": "x² - 8x + 15",
+    "choice_d": "x² + 2x + 15",
     "correct_answer": "B",
     "exam_year": 2024,
     "exam_session": "June",
-    "question_number": 14
+    "question_number": 14,
+    "explanation": "FOIL: x² - 5x + 3x - 15 = x² - 2x - 15."
   },
   {
     "subject": "Algebra I",
     "topic": "Polynomials",
-    "question_text": "Which expression is equivalent to (2x - 3)\u00b2?",
-    "choice_a": "4x\u00b2 - 9",
-    "choice_b": "4x\u00b2 + 9",
-    "choice_c": "4x\u00b2 - 12x + 9",
-    "choice_d": "4x\u00b2 + 12x - 9",
+    "question_text": "Which expression is equivalent to (2x - 3)²?",
+    "choice_a": "4x² - 9",
+    "choice_b": "4x² + 9",
+    "choice_c": "4x² - 12x + 9",
+    "choice_d": "4x² + 12x - 9",
     "correct_answer": "C",
     "exam_year": 2024,
     "exam_session": "June",
-    "question_number": 15
+    "question_number": 15,
+    "explanation": "Perfect square formula (a - b)² = a² - 2ab + b². With a = 2x, b = 3: 4x² - 12x + 9. Most students miss the -12x middle term."
   },
   {
     "subject": "Algebra I",
     "topic": "Polynomials",
-    "question_text": "What is the completely factored form of 2x\u00b2 - 8?",
-    "choice_a": "2(x\u00b2 - 4)",
+    "question_text": "What is the completely factored form of 2x² - 8?",
+    "choice_a": "2(x² - 4)",
     "choice_b": "2(x - 2)(x + 2)",
     "choice_c": "(2x - 4)(x + 2)",
     "choice_d": "2(x - 4)",
     "correct_answer": "B",
     "exam_year": 2024,
     "exam_session": "June",
-    "question_number": 16
+    "question_number": 16,
+    "explanation": "Factor out GCF first: 2(x² - 4). Then factor the difference of squares: 2(x - 2)(x + 2). Choice A stops too early."
   },
   {
     "subject": "Algebra I",
     "topic": "Polynomials",
-    "question_text": "Which expression is equivalent to (3x\u00b2 + 2x - 1) - (x\u00b2 - 4x + 3)?",
-    "choice_a": "2x\u00b2 + 6x - 4",
-    "choice_b": "2x\u00b2 - 2x + 2",
-    "choice_c": "4x\u00b2 - 2x + 2",
-    "choice_d": "2x\u00b2 + 6x + 4",
+    "question_text": "Which expression is equivalent to (3x² + 2x - 1) - (x² - 4x + 3)?",
+    "choice_a": "2x² + 6x - 4",
+    "choice_b": "2x² - 2x + 2",
+    "choice_c": "4x² - 2x + 2",
+    "choice_d": "2x² + 6x + 4",
     "correct_answer": "A",
     "exam_year": 2025,
     "exam_session": "January",
-    "question_number": 13
+    "question_number": 13,
+    "explanation": "Distribute the negative: 3x² + 2x - 1 - x² + 4x - 3. Combine like terms: 2x² + 6x - 4."
   },
   {
     "subject": "Algebra I",
     "topic": "Polynomials",
-    "question_text": "What is the GCF of 12x\u00b3 + 8x\u00b2 - 4x?",
+    "question_text": "What is the GCF of 12x³ + 8x² - 4x?",
     "choice_a": "2x",
     "choice_b": "4x",
-    "choice_c": "4x\u00b2",
+    "choice_c": "4x²",
     "choice_d": "2",
     "correct_answer": "B",
     "exam_year": 2025,
     "exam_session": "January",
-    "question_number": 14
+    "question_number": 14,
+    "explanation": "Each term divides by 4x: 12x³ = 4x · 3x², 8x² = 4x · 2x, 4x = 4x · 1. GCF = 4x."
   },
   {
     "subject": "Algebra I",
@@ -335,7 +360,8 @@
     "correct_answer": "A",
     "exam_year": 2024,
     "exam_session": "June",
-    "question_number": 17
+    "question_number": 17,
+    "explanation": "Sum: 72 + 85 + 90 + 88 + 75 = 410. Mean = 410/5 = 82."
   },
   {
     "subject": "Algebra I",
@@ -345,10 +371,11 @@
     "choice_b": "5",
     "choice_c": "6",
     "choice_d": "9",
-    "correct_answer": "C",
+    "correct_answer": "A",
     "exam_year": 2024,
     "exam_session": "June",
-    "question_number": 18
+    "question_number": 18,
+    "explanation": "Order the data: 4, 7, 7, 9, 11, 13. Lower half {4, 7, 7}: Q1 = 7. Upper half {9, 11, 13}: Q3 = 11. IQR = Q3 - Q1 = 11 - 7 = 4."
   },
   {
     "subject": "Algebra I",
@@ -361,7 +388,8 @@
     "correct_answer": "B",
     "exam_year": 2024,
     "exam_session": "June",
-    "question_number": 19
+    "question_number": 19,
+    "explanation": "Total marbles = 4 + 3 + 5 = 12. P(blue) = 3/12, which simplifies to 1/4. The direct calculation gives 3/12."
   },
   {
     "subject": "Algebra I",
@@ -374,7 +402,8 @@
     "correct_answer": "B",
     "exam_year": 2025,
     "exam_session": "January",
-    "question_number": 16
+    "question_number": 16,
+    "explanation": "Positive correlation means both variables increase together — as x goes up, y goes up. Choice A describes negative correlation."
   },
   {
     "subject": "Algebra I",
@@ -387,7 +416,8 @@
     "correct_answer": "B",
     "exam_year": 2025,
     "exam_session": "January",
-    "question_number": 17
+    "question_number": 17,
+    "explanation": "Five values in order: 5, 8, 12, 15, 20. The median is the middle (3rd) value: 12."
   },
   {
     "subject": "Algebra I",
@@ -400,7 +430,8 @@
     "correct_answer": "B",
     "exam_year": 2024,
     "exam_session": "June",
-    "question_number": 20
+    "question_number": 20,
+    "explanation": "Slope = (y₂ - y₁)/(x₂ - x₁) = (9 - 3)/(4 - 1) = 6/3 = 2."
   },
   {
     "subject": "Algebra I",
@@ -413,7 +444,8 @@
     "correct_answer": "C",
     "exam_year": 2024,
     "exam_session": "June",
-    "question_number": 21
+    "question_number": 21,
+    "explanation": "Slope-intercept form: y = mx + b. Slope m = -3, y-intercept b = 5 (since the line passes through (0, 5)). Equation: y = -3x + 5."
   },
   {
     "subject": "Algebra I",
@@ -426,7 +458,8 @@
     "correct_answer": "C",
     "exam_year": 2024,
     "exam_session": "June",
-    "question_number": 22
+    "question_number": 22,
+    "explanation": "Speed = distance / time = 180 / 3 = 60 mph."
   },
   {
     "subject": "Algebra I",
@@ -439,20 +472,22 @@
     "correct_answer": "B",
     "exam_year": 2025,
     "exam_session": "January",
-    "question_number": 19
+    "question_number": 19,
+    "explanation": "Solve for y: -2y = -4x + 10 → y = 2x - 5. Slope = 2."
   },
   {
     "subject": "Algebra I",
     "topic": "Rate of Change & Slope",
     "question_text": "Two lines are parallel. One has equation y = 3x + 1. Which could be the equation of the second line?",
-    "choice_a": "y = -\u2153x + 1",
+    "choice_a": "y = -⅓x + 1",
     "choice_b": "y = 3x - 4",
     "choice_c": "y = -3x + 1",
-    "choice_d": "y = \u2153x + 2",
+    "choice_d": "y = ⅓x + 2",
     "correct_answer": "B",
     "exam_year": 2025,
     "exam_session": "January",
-    "question_number": 20
+    "question_number": 20,
+    "explanation": "Parallel lines have equal slopes. The given line has slope 3. Only y = 3x - 4 also has slope 3. The other choices have slopes -1/3, -3, and 1/3."
   },
   {
     "subject": "Algebra I",
@@ -465,7 +500,8 @@
     "correct_answer": "A",
     "exam_year": 2024,
     "exam_session": "June",
-    "question_number": 23
+    "question_number": 23,
+    "explanation": "Arithmetic formula: aₙ = a₁ + (n-1)d. a₁ = 3, d = 4, n = 10: a₁₀ = 3 + 9(4) = 39."
   },
   {
     "subject": "Algebra I",
@@ -478,20 +514,22 @@
     "correct_answer": "B",
     "exam_year": 2024,
     "exam_session": "June",
-    "question_number": 24
+    "question_number": 24,
+    "explanation": "Geometric formula: aₙ = a₁ · r^(n-1). a₁ = 2, r = 3, n = 6: a₆ = 2 · 3⁵ = 2 · 243 = 486."
   },
   {
     "subject": "Algebra I",
     "topic": "Sequences (Arithmetic & Geometric)",
     "question_text": "Which recursive formula represents the arithmetic sequence 5, 8, 11, 14, ...?",
     "choice_a": "a_n = a_{n-1} + 5",
-    "choice_b": "a_n = a_{n-1} \u00d7 3",
+    "choice_b": "a_n = a_{n-1} × 3",
     "choice_c": "a_n = a_{n-1} + 3",
-    "choice_d": "a_n = 3 \u00b7 a_{n-1}",
+    "choice_d": "a_n = 3 · a_{n-1}",
     "correct_answer": "C",
     "exam_year": 2025,
     "exam_session": "January",
-    "question_number": 21
+    "question_number": 21,
+    "explanation": "The sequence increases by 3 each time (8-5=3). A recursive formula defines each term from the previous one: aₙ = aₙ₋₁ + 3."
   },
   {
     "subject": "Algebra I",
@@ -504,33 +542,36 @@
     "correct_answer": "B",
     "exam_year": 2025,
     "exam_session": "January",
-    "question_number": 22
+    "question_number": 22,
+    "explanation": "Use aₙ = a₁ · r^(n-1). For n=4: 24 = a₁ · 2³ = 8a₁. So a₁ = 3."
   },
   {
     "subject": "Algebra I",
     "topic": "Number & Quantity",
     "question_text": "Which number is irrational?",
-    "choice_a": "\u221a9",
+    "choice_a": "√9",
     "choice_b": "0.333...",
-    "choice_c": "\u221a7",
+    "choice_c": "√7",
     "choice_d": "7/2",
     "correct_answer": "C",
     "exam_year": 2024,
     "exam_session": "June",
-    "question_number": 25
+    "question_number": 25,
+    "explanation": "√9 = 3 (rational), 0.333... = 1/3 (rational), 7/2 = 3.5 (rational). √7 can’t be written as a fraction — it’s non-terminating and non-repeating, so it’s irrational."
   },
   {
     "subject": "Algebra I",
     "topic": "Number & Quantity",
     "question_text": "Which expression is equivalent to x^{-3}?",
-    "choice_a": "-x\u00b3",
-    "choice_b": "1/x\u00b3",
-    "choice_c": "x\u00b3",
+    "choice_a": "-x³",
+    "choice_b": "1/x³",
+    "choice_c": "x³",
     "choice_d": "3/x",
     "correct_answer": "B",
     "exam_year": 2024,
     "exam_session": "June",
-    "question_number": 26
+    "question_number": 26,
+    "explanation": "Negative exponent means reciprocal: x⁻ⁿ = 1/xⁿ. So x⁻³ = 1/x³. It does not make the value negative."
   },
   {
     "subject": "Algebra I",
@@ -543,20 +584,22 @@
     "correct_answer": "C",
     "exam_year": 2025,
     "exam_session": "January",
-    "question_number": 23
+    "question_number": 23,
+    "explanation": "Fractional exponent m/n means: take the nth root, then raise to the mth power. 27^(2/3) = (³27)² = 3² = 9."
   },
   {
     "subject": "Algebra I",
     "topic": "Number & Quantity",
-    "question_text": "Which expression is equivalent to \u221a50?",
-    "choice_a": "5\u221a2",
-    "choice_b": "2\u221a5",
-    "choice_c": "10\u221a5",
-    "choice_d": "25\u221a2",
+    "question_text": "Which expression is equivalent to √50?",
+    "choice_a": "5√2",
+    "choice_b": "2√5",
+    "choice_c": "10√5",
+    "choice_d": "25√2",
     "correct_answer": "A",
     "exam_year": 2025,
     "exam_session": "January",
-    "question_number": 24
+    "question_number": 24,
+    "explanation": "Factor out the largest perfect square: √50 = √(25 · 2) = 5√2."
   },
   {
     "subject": "Algebra I",
@@ -564,17 +607,18 @@
     "question_text": "A student earns $12 per hour babysitting. She wants to earn at least $96. Which inequality represents the number of hours h she needs to work?",
     "choice_a": "12h < 96",
     "choice_b": "12h > 96",
-    "choice_c": "12h \u2265 96",
-    "choice_d": "12h \u2264 96",
+    "choice_c": "12h ≥ 96",
+    "choice_d": "12h ≤ 96",
     "correct_answer": "C",
     "exam_year": 2025,
     "exam_session": "January",
-    "question_number": 2
+    "question_number": 2,
+    "explanation": "\"At least $96\" means earnings ≥ 96. At $12/hr: 12h ≥ 96."
   },
   {
     "subject": "Algebra I",
     "topic": "Quadratics",
-    "question_text": "What is the axis of symmetry of the parabola y = 2x\u00b2 - 8x + 3?",
+    "question_text": "What is the axis of symmetry of the parabola y = 2x² - 8x + 3?",
     "choice_a": "x = -2",
     "choice_b": "x = 2",
     "choice_c": "x = 4",
@@ -582,7 +626,8 @@
     "correct_answer": "B",
     "exam_year": 2025,
     "exam_session": "January",
-    "question_number": 12
+    "question_number": 12,
+    "explanation": "Axis of symmetry: x = -b/(2a) = 8/(2 · 2) = 8/4 = 2."
   },
   {
     "subject": "Algebra I",
@@ -595,7 +640,8 @@
     "correct_answer": "B",
     "exam_year": 2025,
     "exam_session": "January",
-    "question_number": 4
+    "question_number": 4,
+    "explanation": "A system has no solution when lines are parallel: same slope, different y-intercepts. Both lines in B have slope 2 but intercepts 1 and 3 — they never intersect. Choice D has identical lines (infinitely many solutions)."
   },
   {
     "subject": "Algebra I",
@@ -608,7 +654,8 @@
     "correct_answer": "A",
     "exam_year": 2025,
     "exam_session": "January",
-    "question_number": 18
+    "question_number": 18,
+    "explanation": "Substitute x = 0: 6y = 18 → y = 3. Or rewrite as y = -½x + 3 — the y-intercept is 3."
   },
   {
     "subject": "Algebra I",
@@ -617,11 +664,12 @@
     "choice_a": "A(t) = 500 + 0.04t",
     "choice_b": "A(t) = 500(1.04)^t",
     "choice_c": "A(t) = 500(0.04)^t",
-    "choice_d": "A(t) = 500 \u00b7 4t",
+    "choice_d": "A(t) = 500 · 4t",
     "correct_answer": "B",
     "exam_year": 2025,
     "exam_session": "January",
-    "question_number": 9
+    "question_number": 9,
+    "explanation": "Compound interest: A = P(1 + r)^t. P = 500, r = 0.04: A(t) = 500(1.04)^t. Choice A adds simple interest linearly instead of compounding."
   },
   {
     "subject": "Algebra I",
@@ -634,7 +682,8 @@
     "correct_answer": "B",
     "exam_year": 2025,
     "exam_session": "January",
-    "question_number": 15
+    "question_number": 15,
+    "explanation": "P(sports) = 18/30 = 3/5. Choice A (2/5) is the probability of NOT playing sports (12/30 = 2/5). Make sure you’re reading the right group."
   },
   {
     "subject": "Algebra I",
@@ -647,38 +696,41 @@
     "correct_answer": "B",
     "exam_year": 2025,
     "exam_session": "January",
-    "question_number": 20
+    "question_number": 20,
+    "explanation": "Parallel lines have equal slopes. The given line has slope 3. Only y = 3x - 4 also has slope 3. The other choices have slopes -1/3, -3, and 1/3."
   },
   {
     "subject": "Algebra I",
     "topic": "Polynomials",
-    "question_text": "Which is the factored form of x\u00b2 - 9?",
+    "question_text": "Which is the factored form of x² - 9?",
     "choice_a": "(x - 9)(x + 1)",
-    "choice_b": "(x - 3)\u00b2",
+    "choice_b": "(x - 3)²",
     "choice_c": "(x + 3)(x - 3)",
     "choice_d": "(x + 9)(x - 1)",
     "correct_answer": "C",
     "exam_year": 2025,
     "exam_session": "January",
-    "question_number": 15
+    "question_number": 15,
+    "explanation": "x² - 9 is a difference of squares: a² - b² = (a+b)(a-b). With a = x, b = 3: (x + 3)(x - 3)."
   },
   {
     "subject": "Algebra I",
     "topic": "Number & Quantity",
     "question_text": "Which of the following is a rational number?",
-    "choice_a": "\u03c0",
-    "choice_b": "\u221a5",
+    "choice_a": "π",
+    "choice_b": "√5",
     "choice_c": "0.25",
-    "choice_d": "\u221a3",
+    "choice_d": "√3",
     "correct_answer": "C",
     "exam_year": 2025,
     "exam_session": "January",
-    "question_number": 25
+    "question_number": 25,
+    "explanation": "0.25 = 1/4, which is a ratio of two integers — that’s the definition of rational. π, √5, and √3 are all non-terminating, non-repeating decimals (irrational)."
   },
   {
     "subject": "Algebra I",
     "topic": "Linear Equations & Inequalities",
-    "question_text": "Solve for x: 5x \u2212 3 = 17. Enter your answer as a number.",
+    "question_text": "Solve for x: 5x − 3 = 17. Enter your answer as a number.",
     "choice_a": "",
     "choice_b": "",
     "choice_c": "",
@@ -687,7 +739,8 @@
     "exam_year": 2024,
     "exam_session": "June",
     "question_number": 101,
-    "question_type": "grid_in"
+    "question_type": "grid_in",
+    "explanation": "Add 3 to both sides: 5x = 20. Divide by 5: x = 4."
   },
   {
     "subject": "Algebra I",
@@ -701,12 +754,13 @@
     "exam_year": 2024,
     "exam_session": "June",
     "question_number": 102,
-    "question_type": "grid_in"
+    "question_type": "grid_in",
+    "explanation": "Slope = (y₂ - y₁)/(x₂ - x₁) = (11 - 3)/(5 - 1) = 8/4 = 2."
   },
   {
     "subject": "Algebra I",
     "topic": "Quadratics",
-    "question_text": "If f(x) = x\u00b2 \u2212 2x + 1, what is the value of f(4)? Enter your answer as a number.",
+    "question_text": "If f(x) = x² − 2x + 1, what is the value of f(4)? Enter your answer as a number.",
     "choice_a": "",
     "choice_b": "",
     "choice_c": "",
@@ -715,12 +769,13 @@
     "exam_year": 2025,
     "exam_session": "January",
     "question_number": 101,
-    "question_type": "grid_in"
+    "question_type": "grid_in",
+    "explanation": "f(4) = 4² - 2(4) + 1 = 16 - 8 + 1 = 9. You can also factor as (x-1)²: f(4) = (4-1)² = 9."
   },
   {
     "subject": "Algebra I",
     "topic": "Linear Equations & Inequalities",
-    "question_text": "What is the y-intercept of the line y = \u22122x + 7? Enter your answer as a number.",
+    "question_text": "What is the y-intercept of the line y = −2x + 7? Enter your answer as a number.",
     "choice_a": "",
     "choice_b": "",
     "choice_c": "",
@@ -729,7 +784,8 @@
     "exam_year": 2025,
     "exam_session": "January",
     "question_number": 102,
-    "question_type": "grid_in"
+    "question_type": "grid_in",
+    "explanation": "In y = mx + b, the y-intercept is b, the constant term. Here b = 7."
   },
   {
     "subject": "Algebra I",
@@ -743,8 +799,7 @@
     "exam_year": 2025,
     "exam_session": "January",
     "question_number": 103,
-    "question_type": "grid_in"
+    "question_type": "grid_in",
+    "explanation": "aₙ = a₁ + (n-1)d. a₆ = 3 + (5)(4) = 3 + 20 = 23."
   }
 ]
-
-
