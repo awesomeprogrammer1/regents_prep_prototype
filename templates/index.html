@@ -5,57 +5,20 @@
 {% block content %}
 
 <!-- ══════════════════════════════════════════════
-     SCREEN 1 — fills the viewport on first load
+     SCREEN 1 — hero, fills the viewport
 ════════════════════════════════════════════════ -->
 <div class="home-screen home-screen-1">
 
-  <!-- ── HERO ── -->
-  <section class="home-hero">
-    <div class="home-hero-text">
-      <p class="home-hero-eyebrow">NYS Regents</p>
-      <h1 class="home-hero-title">Exam Prep</h1>
-      <p class="home-hero-sub">Practice real past Regents questions, track your weak topics, and study smarter — one question at a time.</p>
-      <a href="{{ url_for('practice', subject='Algebra I') }}" class="home-hero-btn">
-        <span class="home-hero-btn-play">&#9654;</span>
-        <span>
-          <span class="home-hero-btn-title">Get Started</span>
-          <span class="home-hero-btn-sub">{{ subjects|length }} subject{% if subjects|length != 1 %}s{% endif %} available</span>
-        </span>
-      </a>
-    </div>
-    <div class="home-hero-art" aria-hidden="true">
-      <div class="art-circle art-circle-1"></div>
-      <div class="art-circle art-circle-2"></div>
-      <div class="art-icon">&#128218;</div>
-    </div>
-  </section>
+  <!-- NYS hologram -->
+  <div class="hologram-wrap" aria-hidden="true">
+    <svg id="nys-hologram" viewBox="0 0 220 158" xmlns="http://www.w3.org/2000/svg"></svg>
+  </div>
 
-  <!-- ── SUBJECT CARDS ── -->
-  <div class="home-subjects-wrap">
-    <p class="home-subjects-label">CHOOSE A SUBJECT</p>
-    <div class="home-subjects-scroll">
-    <div class="home-subjects-row">
-      {% for subject in subjects %}
-      <a href="{{ url_for('practice', subject=subject) }}" class="subject-card subject-card-active">
-        <span class="subject-card-name">{{ subject }}</span>
-        <span class="subject-card-meta">Multiple choice + Grid-in</span>
-        <span class="subject-card-play">&#9654;</span>
-      </a>
-      {% endfor %}
-      <div class="subject-card subject-card-soon">
-        <span class="subject-card-name">Geometry</span>
-        <span class="subject-card-meta">Coming soon</span>
-      </div>
-      <div class="subject-card subject-card-soon">
-        <span class="subject-card-name">Living Environment</span>
-        <span class="subject-card-meta">Coming soon</span>
-      </div>
-      <div class="subject-card subject-card-soon">
-        <span class="subject-card-name">Earth Science</span>
-        <span class="subject-card-meta">Coming soon</span>
-      </div>
-    </div>
-    </div>
+  <!-- Hero text -->
+  <div class="home-hero-text">
+    <p class="home-hero-eyebrow">NYS Regents</p>
+    <h1 class="home-hero-title">Exam Prep</h1>
+    <p class="home-hero-sub">Placeholder — replace with a description of the platform and what makes it useful for students.</p>
   </div>
 
   <!-- scroll hint -->
@@ -67,20 +30,60 @@
 </div><!-- end screen 1 -->
 
 <!-- ══════════════════════════════════════════════
-     SCREEN 2 — map, revealed on scroll
+     SCREEN 2 — subject selection, revealed on scroll
 ════════════════════════════════════════════════ -->
-<div class="home-screen home-screen-2 reveal-on-scroll">
+<div class="home-screen home-screen-2 stagger-section">
+  <div class="home-subjects-wrap">
+    <p class="home-subjects-label stagger-item">CHOOSE A SUBJECT</p>
+    <div class="home-subjects-scroll stagger-item">
+      <div class="home-subjects-row">
+        {% for subject in subjects %}
+        <a href="{{ url_for('practice', subject=subject) }}" class="subject-card subject-card-active">
+          <span class="subject-card-name">{{ subject }}</span>
+          <span class="subject-card-meta">Multiple choice + Grid-in</span>
+          <span class="subject-card-play">&#9654;</span>
+        </a>
+        {% endfor %}
+        <div class="subject-card subject-card-soon">
+          <span class="subject-card-name">Geometry</span>
+          <span class="subject-card-meta">Coming soon</span>
+        </div>
+        <div class="subject-card subject-card-soon">
+          <span class="subject-card-name">Living Environment</span>
+          <span class="subject-card-meta">Coming soon</span>
+        </div>
+        <div class="subject-card subject-card-soon">
+          <span class="subject-card-name">Earth Science</span>
+          <span class="subject-card-meta">Coming soon</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="subjects-faq stagger-item">
+    <button class="subjects-faq-toggle" id="subjects-faq-toggle" aria-expanded="false">
+      Why is my subject not available?
+    </button>
+    <div class="subjects-faq-body" id="subjects-faq-body" hidden>
+      <p>Subjects are added, modified and removed based on need determined by analysis of student performance data and curriculum requirements.</p>
+    </div>
+  </div>
+</div><!-- end screen 2 -->
+
+<!-- ══════════════════════════════════════════════
+     SCREEN 3 — map, revealed on scroll
+════════════════════════════════════════════════ -->
+<div class="home-screen home-screen-3 stagger-section">
 <div class="home-map-section">
   <div id="map-container">
     <div class="map-header">
-      <div class="map-header-eyebrow">ACCESSABILITY</div>
-      <div class="map-header-title">700+ districts. One platform.</div>
-      <div class="map-header-sub">Created in NYC. Accessable across all 62 NYS counties.</div>
+      <div class="map-header-eyebrow stagger-item">ACCESSIBILITY</div>
+      <div class="map-header-title stagger-item">700+ schooling districts. 62 counties. One platform.</div>
+      <div class="map-header-sub stagger-item">Built by NY students, for NY students.</div>
     </div>
-    <canvas id="cv"></canvas>
+    <canvas id="cv" class="stagger-item"></canvas>
   </div>
 </div>
-</div><!-- end screen 2 -->
+</div><!-- end screen 3 -->
 
 <!-- ── SMALL CTA ── -->
 {% if not session.get('user_id') or session.get('user_id') == 0 %}
@@ -153,23 +156,65 @@ const mainland = [
 ];
 
 const longIsland = [
-  [-73.76,40.64],[-73.7384,40.6344],[-73.6972,40.6329],
-  [-73.6466,40.6355],[-73.5771,40.6451],[-73.498,40.6579],
-  [-73.4191,40.6716],[-73.3409,40.6882],[-73.263,40.7068],
-  [-73.1858,40.7283],[-73.1088,40.7508],[-73.032,40.7743],
-  [-72.9554,40.7987],[-72.879,40.8242],[-72.8029,40.8506],
-  [-72.7267,40.877],[-72.6507,40.9044],[-72.575,40.9328],
-  [-72.4992,40.9611],[-72.4235,40.9895],[-72.3477,41.0179],
-  [-72.2724,41.0482],[-72.1972,41.0795],[-72.1221,41.1108],
-  [-72.0476,41.1451],[-71.9935,41.1791],[-71.9431,41.2307],
-  [-71.9968,41.2908],[-72.0617,41.3077],[-72.1626,41.3016],
-  [-72.2821,41.2864],[-72.4201,41.2622],[-72.5566,41.2311],
-  [-72.6919,41.1942],[-72.8263,41.1533],[-72.9604,41.1105],
-  [-73.0744,41.0699],[-73.1689,41.0335],[-73.2632,40.9961],
-  [-73.3575,40.9587],[-73.4519,40.9222],[-73.5273,40.8919],
-  [-73.5924,40.8617],[-73.6574,40.8305],[-73.7125,40.8014],
-  [-73.7479,40.7755],[-73.7731,40.7497],[-73.7885,40.726],
-  [-73.7941,40.7043],[-73.79,40.6847],[-73.775,40.6624],[-73.76,40.64]
+  [-73.7550,40.5900],[-73.7650,40.5950],[-73.7780,40.6020],[-73.7900,40.6100],
+  [-73.8050,40.6200],[-73.8200,40.6350],[-73.8350,40.6500],[-73.8500,40.6600],
+  [-73.8650,40.6720],[-73.8800,40.6850],[-73.8950,40.6950],[-73.9100,40.7050],
+  [-73.9200,40.7150],[-73.9100,40.7250],[-73.8950,40.7350],[-73.8800,40.7480],
+  [-73.8650,40.7550],[-73.8500,40.7630],[-73.8350,40.7700],[-73.8200,40.7780],
+  [-73.8050,40.7850],[-73.7900,40.7920],[-73.7750,40.7980],[-73.7600,40.8050],
+  [-73.7450,40.8100],[-73.7300,40.8130],[-73.7150,40.8100],[-73.7000,40.8050],
+  [-73.6850,40.7980],[-73.6700,40.7900],[-73.6550,40.7850],[-73.6400,40.7830],
+  [-73.6250,40.7850],[-73.6100,40.7900],[-73.5950,40.7950],[-73.5800,40.7980],
+  [-73.5650,40.8010],[-73.5500,40.8050],[-73.5350,40.8080],[-73.5200,40.8100],
+  [-73.5050,40.8120],[-73.4900,40.8140],[-73.4750,40.8160],[-73.4600,40.8180],
+  [-73.4450,40.8200],[-73.4300,40.8230],[-73.4150,40.8260],[-73.4000,40.8290],
+  [-73.3850,40.8320],[-73.3700,40.8350],[-73.3550,40.8380],[-73.3400,40.8420],
+  [-73.3250,40.8460],[-73.3100,40.8500],[-73.2950,40.8540],[-73.2800,40.8570],
+  [-73.2650,40.8600],[-73.2500,40.8630],[-73.2350,40.8660],[-73.2200,40.8690],
+  [-73.2050,40.8720],[-73.1900,40.8750],[-73.1750,40.8790],[-73.1600,40.8830],
+  [-73.1450,40.8870],[-73.1300,40.8910],[-73.1150,40.8950],[-73.1000,40.8990],
+  [-73.0850,40.9030],[-73.0700,40.9070],[-73.0550,40.9100],[-73.0400,40.9130],
+  [-73.0250,40.9170],[-73.0100,40.9210],[-72.9950,40.9250],[-72.9800,40.9280],
+  [-72.9650,40.9310],[-72.9500,40.9340],[-72.9350,40.9370],[-72.9200,40.9400],
+  [-72.9050,40.9430],[-72.8900,40.9460],[-72.8750,40.9490],[-72.8600,40.9510],
+  [-72.8450,40.9530],[-72.8300,40.9550],[-72.8150,40.9570],[-72.8000,40.9590],
+  [-72.7850,40.9610],[-72.7700,40.9630],[-72.7550,40.9650],[-72.7400,40.9670],
+  [-72.7250,40.9680],[-72.7100,40.9690],[-72.6950,40.9700],[-72.6800,40.9710],
+  [-72.6650,40.9720],[-72.6500,40.9730],[-72.6350,40.9740],[-72.6200,40.9750],
+  [-72.6050,40.9760],[-72.5900,40.9770],[-72.5750,40.9780],[-72.5600,40.9790],
+  [-72.5450,40.9800],[-72.5300,40.9810],[-72.5150,40.9815],[-72.5000,40.9820],
+  [-72.4850,40.9825],[-72.4700,40.9830],[-72.4550,40.9835],[-72.4400,40.9835],
+  [-72.4250,40.9830],[-72.4100,40.9820],[-72.3950,40.9800],[-72.3800,40.9780],
+  [-72.3650,40.9760],[-72.3500,40.9740],[-72.3350,40.9720],[-72.3200,40.9700],
+  [-72.3050,40.9680],[-72.2900,40.9660],[-72.2750,40.9650],[-72.2600,40.9640],
+  [-72.2450,40.9630],[-72.2300,40.9620],[-72.2150,40.9610],[-72.2000,40.9600],
+  [-72.1850,40.9585],[-72.1700,40.9570],[-72.1550,40.9555],[-72.1400,40.9540],
+  [-72.1250,40.9530],[-72.1100,40.9520],[-72.0900,40.9510],[-72.0700,40.9500],
+  [-72.0500,40.9490],[-72.0300,40.9480],[-72.0100,40.9470],[-71.9900,40.9460],
+  [-71.9700,40.9450],[-71.9500,40.9440],[-71.9350,40.9430],[-71.9200,40.9420],
+  [-71.9400,40.9350],[-71.9600,40.9280],[-71.9800,40.9200],[-72.0000,40.9130],
+  [-72.0200,40.9070],[-72.0400,40.9010],[-72.0600,40.8950],[-72.0800,40.8880],
+  [-72.1000,40.8810],[-72.1200,40.8750],[-72.1400,40.8700],[-72.1600,40.8660],
+  [-72.1800,40.8620],[-72.2000,40.8580],[-72.2200,40.8540],[-72.2400,40.8500],
+  [-72.2600,40.8460],[-72.2800,40.8420],[-72.3000,40.8380],[-72.3200,40.8340],
+  [-72.3400,40.8300],[-72.3600,40.8260],[-72.3800,40.8220],[-72.4000,40.8180],
+  [-72.4200,40.8140],[-72.4400,40.8100],[-72.4600,40.8050],[-72.4800,40.8000],
+  [-72.5000,40.7950],[-72.5200,40.7900],[-72.5400,40.7850],[-72.5600,40.7800],
+  [-72.5800,40.7750],[-72.6000,40.7700],[-72.6200,40.7650],[-72.6400,40.7600],
+  [-72.6600,40.7560],[-72.6800,40.7530],[-72.7000,40.7500],[-72.7200,40.7470],
+  [-72.7400,40.7440],[-72.7600,40.7410],[-72.7800,40.7380],[-72.8000,40.7350],
+  [-72.8200,40.7320],[-72.8400,40.7290],[-72.8600,40.7260],[-72.8800,40.7230],
+  [-72.9000,40.7200],[-72.9200,40.7170],[-72.9400,40.7150],[-72.9600,40.7130],
+  [-72.9800,40.7110],[-73.0000,40.7090],[-73.0200,40.7060],[-73.0400,40.7030],
+  [-73.0600,40.6990],[-73.0800,40.6950],[-73.1000,40.6900],[-73.1200,40.6850],
+  [-73.1400,40.6800],[-73.1600,40.6750],[-73.1800,40.6700],[-73.2000,40.6650],
+  [-73.2200,40.6600],[-73.2400,40.6560],[-73.2600,40.6530],[-73.2800,40.6500],
+  [-73.3000,40.6470],[-73.3200,40.6440],[-73.3400,40.6410],[-73.3600,40.6380],
+  [-73.3800,40.6350],[-73.4000,40.6320],[-73.4200,40.6290],[-73.4400,40.6260],
+  [-73.4600,40.6230],[-73.4800,40.6200],[-73.5000,40.6170],[-73.5200,40.6140],
+  [-73.5400,40.6110],[-73.5600,40.6080],[-73.5800,40.6050],[-73.6000,40.6030],
+  [-73.6200,40.6010],[-73.6400,40.5990],[-73.6600,40.5970],[-73.6800,40.5950],
+  [-73.7000,40.5930],[-73.7200,40.5910],[-73.7400,40.5900],[-73.7550,40.5900]
 ];
 
 const counties = [
@@ -372,9 +417,37 @@ function renderMap() {
 }
 
 window.addEventListener('resize', function () {
-  var section = document.querySelector('.home-screen-2');
-  if (section && section.classList.contains('is-visible')) { renderMap(); }
+  var canvas = document.getElementById('cv');
+  if (canvas && canvas.classList.contains('is-visible')) { renderMap(); }
 });
+
+// ── NYS Hologram ──
+(function () {
+  var svg = document.getElementById('nys-hologram');
+  if (!svg) return;
+
+  var VW = 220, VH = 158, hpad = 8;
+  var hMinLon = -80.1, hMaxLon = -71.3, hMinLat = 40.25, hMaxLat = 45.15;
+
+  function hproj(lon, lat) {
+    var x = (lon - hMinLon) / (hMaxLon - hMinLon) * (VW - hpad * 2) + hpad;
+    var y = (VH - hpad) - (lat - hMinLat) / (hMaxLat - hMinLat) * (VH - hpad * 2) + 3;
+    return x.toFixed(1) + ',' + y.toFixed(1);
+  }
+
+  function makePath(coords) {
+    var d = coords.map(function (p, i) {
+      return (i === 0 ? 'M' : 'L') + hproj(p[0], p[1]);
+    }).join(' ') + ' Z';
+    var el = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    el.setAttribute('d', d);
+    el.setAttribute('class', 'holo-shape');
+    return el;
+  }
+
+  svg.appendChild(makePath(mainland));
+  svg.appendChild(makePath(longIsland));
+})();
 </script>
 
 {% endblock %}

@@ -41,6 +41,21 @@ def check_grid_in(submitted, correct):
         return False
 
 
+def _safe_grid_placeholder(correct_answer):
+    """Return a placeholder string whose examples don't match the correct answer."""
+    candidates = [
+        ('5', '3/2', '-1.5'),
+        ('6', '1/4', '-3'),
+        ('3', '5/2', '-2'),
+        ('8', '1/3', '-4'),
+    ]
+    ans = str(correct_answer).strip()
+    for group in candidates:
+        if ans not in group:
+            return 'e.g. ' + ' or '.join(group)
+    return 'Enter a number'
+
+
 def login_required(f):
     from functools import wraps
     @wraps(f)
@@ -151,11 +166,16 @@ def question():
     if not q:
         return redirect(url_for('results'))
 
+    grid_placeholder = None
+    if q.get('question_type') == 'grid_in':
+        grid_placeholder = _safe_grid_placeholder(q['correct_answer'])
+
     return render_template(
         'practice.html',
         question=q,
         question_number=index + 1,
         total=len(question_ids),
+        grid_placeholder=grid_placeholder,
     )
 
 

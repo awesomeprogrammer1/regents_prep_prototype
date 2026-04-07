@@ -121,24 +121,45 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   // ------------------------------------------------------------------
-  // Reveal-on-scroll: watch for .reveal-on-scroll elements entering viewport
-  // Also triggers renderMap() when the map screen becomes visible
+  // Stagger-on-scroll: when a .stagger-section enters viewport, reveal
+  // its .stagger-item children one by one with 70ms between each.
+  // Also triggers renderMap() when the map screen becomes visible.
   // ------------------------------------------------------------------
-  var revealEls = document.querySelectorAll('.reveal-on-scroll');
-  if (revealEls.length) {
-    var revealObserver = new IntersectionObserver(function (entries) {
+  var staggerSections = document.querySelectorAll('.stagger-section');
+  if (staggerSections.length) {
+    var STAGGER_MS = 70;
+    var staggerObserver = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          if (entry.target.classList.contains('home-screen-2') &&
+          var items = entry.target.querySelectorAll('.stagger-item');
+          items.forEach(function (item, i) {
+            item.style.transitionDelay = (i * STAGGER_MS) + 'ms';
+            item.classList.add('is-visible');
+          });
+          if (entry.target.classList.contains('home-screen-3') &&
               typeof renderMap === 'function') {
-            renderMap();
+            // Delay map render until canvas is visible
+            var canvasDelay = items.length * STAGGER_MS;
+            setTimeout(renderMap, canvasDelay);
           }
-          revealObserver.unobserve(entry.target);
+          staggerObserver.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.1 });
-    revealEls.forEach(function (el) { revealObserver.observe(el); });
+    }, { threshold: 0.15 });
+    staggerSections.forEach(function (el) { staggerObserver.observe(el); });
+  }
+
+  // ------------------------------------------------------------------
+  // "Why is my subject not available?" toggle
+  // ------------------------------------------------------------------
+  var faqToggle = document.getElementById('subjects-faq-toggle');
+  var faqBody   = document.getElementById('subjects-faq-body');
+  if (faqToggle && faqBody) {
+    faqToggle.addEventListener('click', function () {
+      var expanded = faqToggle.getAttribute('aria-expanded') === 'true';
+      faqToggle.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+      faqBody.hidden = expanded;
+    });
   }
 
   // ------------------------------------------------------------------

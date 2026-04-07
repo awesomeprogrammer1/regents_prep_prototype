@@ -23,7 +23,7 @@
         <div class="grid-in-input-wrap">
           <label for="grid_answer" class="grid-in-label">Enter your answer:</label>
           <input type="text" id="grid_answer" name="grid_answer" class="grid-in-input"
-                 autocomplete="off" placeholder="e.g. 4 or 3/2 or -1.5" required />
+                 autocomplete="off" placeholder="{{ grid_placeholder }}" required />
         </div>
       {% else %}
         {% for letter, text in [('A', question.choice_a), ('B', question.choice_b), ('C', question.choice_c), ('D', question.choice_d)] %}
