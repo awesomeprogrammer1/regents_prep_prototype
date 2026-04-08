@@ -14,7 +14,7 @@ seed_questions.seed()
 GUEST_USER_ID = 0
 SESSION_LENGTH = 10
 
-SUBJECTS = ['Algebra I']
+SUBJECTS = ['Algebra I', 'Geometry']
 
 
 # ---------------------------------------------------------------------------

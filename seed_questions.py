@@ -1,17 +1,23 @@
-"""Populate the database with questions from questions/algebra1.json."""
+"""Populate the database with questions from the questions/ directory."""
 import json
 import os
 import database
 
-QUESTIONS_FILE = os.path.join(os.path.dirname(__file__), 'questions', 'algebra1.json')
+_DIR = os.path.dirname(__file__)
+QUESTION_FILES = [
+    os.path.join(_DIR, 'questions', 'algebra1.json'),
+    os.path.join(_DIR, 'questions', 'geometry.json'),
+]
 
 
 def seed():
     database.init_db()
     conn = database.get_db()
 
-    with open(QUESTIONS_FILE, 'r', encoding='utf-8') as f:
-        questions = json.load(f)
+    questions = []
+    for path in QUESTION_FILES:
+        with open(path, 'r', encoding='utf-8') as f:
+            questions.extend(json.load(f))
 
     inserted = 0
     for q in questions:
