@@ -40,7 +40,7 @@
         {% for subject in subjects %}
         <a href="{{ url_for('practice', subject=subject) }}" class="subject-card subject-card-active">
           <span class="subject-card-name">{{ subject }}</span>
-          <span class="subject-card-meta">Multiple choice + Grid-in</span>
+          <span class="subject-card-meta">Multiple choice + Grid-in{% if subject == 'Geometry' %} and constructions{% endif %}</span>
           <span class="subject-card-play">&#9654;</span>
         </a>
         {% endfor %}
