@@ -40,7 +40,7 @@
         {% for subject in subjects %}
         <a href="{{ url_for('practice', subject=subject) }}" class="subject-card subject-card-active">
           <span class="subject-card-name">{{ subject }}</span>
-          <span class="subject-card-meta">Multiple choice + Grid-in{% if subject == 'Geometry' %} and constructions{% endif %}</span>
+          <span class="subject-card-meta">Multiple choice, Grid-in{% if subject == 'Geometry' %}, Constructions{% endif %}</span>
           <span class="subject-card-play">&#9654;</span>
         </a>
         {% endfor %}
@@ -114,12 +114,12 @@ const cv  = document.getElementById('cv');
 const ctx = cv.getContext('2d');
 const ctr = document.getElementById('map-container');
 
-const pad = 45;
-const minLon = -80.1, maxLon = -71.3, minLat = 40.25, maxLat = 45.15;
+const pad = 28;
+const minLon = -79.85, maxLon = -71.65, minLat = 40.45, maxLat = 45.05;
 
 function project(lon, lat, W, H) {
   const x = (lon - minLon) / (maxLon - minLon) * (W - pad*2) + pad;
-  const y = (H - pad) - (lat - minLat) / (maxLat - minLat) * (H - pad*2 + 10) + 5;
+  const y = (H - pad) - (lat - minLat) / (maxLat - minLat) * (H - pad*2);
   return [x, y];
 }
 
@@ -287,7 +287,7 @@ const counties = [
   {county:"Schuyler",city:"Watkins Glen",lat:42.3809,lon:-76.8722},
   {county:"Seneca",city:"Waterloo",lat:42.9048,lon:-76.8586},
   {county:"Steuben",city:"Bath",lat:42.337,lon:-77.3178},
-  {county:"Suffolk",city:"Riverhead",lat:41.05,lon:-72.6621},
+  {county:"Suffolk",city:"Riverhead",lat:40.93,lon:-72.6621},
   {county:"Sullivan",city:"Monticello",lat:41.6556,lon:-74.6893},
   {county:"Tioga",city:"Owego",lat:42.1037,lon:-76.2622},
   {county:"Tompkins",city:"Ithaca",lat:42.444,lon:-76.5019},

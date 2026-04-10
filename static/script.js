@@ -84,18 +84,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // ------------------------------------------------------------------
   // Dark mode — persist preference in localStorage
   // ------------------------------------------------------------------
-  var darkToggle = document.getElementById('dark-toggle');
-  if (localStorage.getItem('dark') === '1') {
-    document.body.classList.add('dark');
-    if (darkToggle) darkToggle.textContent = '\u2600'; // sun icon when dark
-  }
-  if (darkToggle) {
-    darkToggle.addEventListener('click', function () {
-      var isDark = document.body.classList.toggle('dark');
-      localStorage.setItem('dark', isDark ? '1' : '0');
-      darkToggle.textContent = isDark ? '\u2600' : '\u263E'; // sun / moon
-    });
-  }
+  document.body.classList.add('dark');
 
   // ------------------------------------------------------------------
   // Highlight selected radio choice visually
