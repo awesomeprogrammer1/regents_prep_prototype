@@ -114,8 +114,8 @@ const cv  = document.getElementById('cv');
 const ctx = cv.getContext('2d');
 const ctr = document.getElementById('map-container');
 
-const pad = 28;
-const minLon = -79.85, maxLon = -71.65, minLat = 40.45, maxLat = 45.05;
+const pad = 38;
+const minLon = -80.0, maxLon = -71.2, minLat = 40.3, maxLat = 45.1;
 
 function project(lon, lat, W, H) {
   const x = (lon - minLon) / (maxLon - minLon) * (W - pad*2) + pad;
@@ -287,7 +287,7 @@ const counties = [
   {county:"Schuyler",city:"Watkins Glen",lat:42.3809,lon:-76.8722},
   {county:"Seneca",city:"Waterloo",lat:42.9048,lon:-76.8586},
   {county:"Steuben",city:"Bath",lat:42.337,lon:-77.3178},
-  {county:"Suffolk",city:"Riverhead",lat:40.93,lon:-72.6621},
+  {county:"Suffolk",city:"Riverhead",lat:40.83,lon:-73.00},
   {county:"Sullivan",city:"Monticello",lat:41.6556,lon:-74.6893},
   {county:"Tioga",city:"Owego",lat:42.1037,lon:-76.2622},
   {county:"Tompkins",city:"Ithaca",lat:42.444,lon:-76.5019},
